@@ -16,7 +16,7 @@
 			<Setter Property="BorderThickness" Value="0"/>
 		</Style>
 	</Page.Resources>
-	<Grid Name="PageContent" Background="#121212" RequestedTheme="Dark" Loaded="PageContent_Loaded">
+	<Grid Background="#121212" RequestedTheme="Dark" Loaded="PageContent_Loaded">
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition/>
 		</Grid.ColumnDefinitions>
@@ -24,7 +24,7 @@
 			<RowDefinition/>
 			<RowDefinition Height="90"/>
 		</Grid.RowDefinitions>
-		<Grid Name="WindowContent" Grid.Row="0">
+		<Grid Grid.Row="0">
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="256"/>
 				<ColumnDefinition/>
@@ -32,7 +32,7 @@
 			<Grid.RowDefinitions>
 				<RowDefinition/>
 			</Grid.RowDefinitions>
-			<Grid Name="NavigationBar" Grid.Column="0" Background="#000000">
+			<Grid Grid.Column="0" Background="#000000">
 				<Grid.ColumnDefinitions>
 					<ColumnDefinition/>
 				</Grid.ColumnDefinitions>
@@ -40,7 +40,7 @@
 					<RowDefinition/>
 					<RowDefinition Height="256"/>
 				</Grid.RowDefinitions>
-				<Grid Name="NavigationOptions" Grid.Row="0">
+				<Grid Grid.Row="0">
 					<Grid.ColumnDefinitions>
 						<ColumnDefinition/>
 					</Grid.ColumnDefinitions>
@@ -118,15 +118,15 @@
 						<Button Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="ScanLocationsButton_Click"/>
 					</Grid>
 				</Grid>
-				<Grid Name="NavigationPreview" Grid.Row="2" Background="#0a0a0a">
+				<Grid Grid.Row="2" Background="#0a0a0a">
 					<Image/>
 				</Grid>
 			</Grid>
-			<Grid Name="Content" Grid.Column="1" Background="#121212">
+			<Grid Grid.Column="1" Background="#121212">
 				<Frame Name="ContentFrame"/>
 			</Grid>
 		</Grid>
-		<Grid Name="ControlBar" Grid.Row="1">
+		<Grid Grid.Row="1">
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition/>
 			</Grid.ColumnDefinitions>
@@ -135,7 +135,7 @@
 				<RowDefinition/>
 			</Grid.RowDefinitions>
 			<Rectangle Fill="#282828" Grid.Row="0"/>
-			<Grid Name="ControlBarContent" Grid.Row="1" Background="#181818">
+			<Grid Grid.Row="1" Background="#181818">
 				<Grid.ColumnDefinitions>
 					<ColumnDefinition Width="256"/>
 					<ColumnDefinition Width="32"/>
@@ -146,7 +146,7 @@
 				<Grid.RowDefinitions>
 					<RowDefinition/>
 				</Grid.RowDefinitions>
-				<Grid Name="ControlBarInfo" Grid.Column="0">
+				<Grid Grid.Column="0">
 					<Grid.ColumnDefinitions>
 						<ColumnDefinition Width="32"/>
 						<ColumnDefinition/>
@@ -156,10 +156,10 @@
 						<RowDefinition/>
 						<RowDefinition/>
 					</Grid.RowDefinitions>
-					<TextBlock Name="ContentTitle" Grid.Column="1" Grid.Row="0" VerticalAlignment="Bottom" FontSize="16" FontWeight="Bold">Content Name</TextBlock>
-					<TextBlock Name="ContentDescription" Grid.Column="1" Grid.Row="1" VerticalAlignment="Top" FontSize="16">Content Description</TextBlock>
+					<TextBlock Name="MediaTitle" Grid.Column="1" Grid.Row="0" VerticalAlignment="Bottom" FontSize="16" FontWeight="Bold"></TextBlock>
+					<TextBlock Name="MediaArtist" Grid.Column="1" Grid.Row="1" VerticalAlignment="Top" FontSize="16"></TextBlock>
 				</Grid>
-				<Grid Name="ControlBarContentControls" Grid.Column="2">
+				<Grid Grid.Column="2">
 					<Grid.ColumnDefinitions>
 						<ColumnDefinition/>
 						<ColumnDefinition Width="384"/>
@@ -169,7 +169,7 @@
 						<RowDefinition Height="48"/>
 						<RowDefinition/>
 					</Grid.RowDefinitions>
-					<Grid Name="CotnrolBarPlayControls" Grid.Column="1" Grid.Row="0">
+					<Grid Grid.Column="1" Grid.Row="0">
 						<Grid.ColumnDefinitions>
 							<ColumnDefinition/>
 							<ColumnDefinition/>
@@ -181,25 +181,37 @@
 							<RowDefinition Height="4"/>
 							<RowDefinition/>
 						</Grid.RowDefinitions>
-						<Button Width="42" Height="42" HorizontalAlignment="Center" Grid.Row="1" Grid.Column="0">
-							<TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="{StaticResource IcoFont}" FontSize="28" TextAlignment="Center" Text="&#xEFCF;" Margin="-16,-16,-16,-16"/>
+						<Button Name="MediaShuffleButton" Width="42" Height="42" HorizontalAlignment="Center" Grid.Row="1" Grid.Column="0" Click="MediaShuffleButton_Click">
+							<TextBlock Name="MediaShuffleText" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="{StaticResource IcoFont}" FontSize="28" TextAlignment="Center" Text="&#xEFCF;" Margin="-16,-16,-16,-16"/>
 						</Button>
-						<Button Width="42" Height="42" HorizontalAlignment="Center" Grid.Row="1" Grid.Column="1">
-							<TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="{StaticResource IcoFont}" FontSize="28" TextAlignment="Center" Text="&#xEC78;" Margin="-16,-16,-16,-16"/>
+						<Button Name="MediaPreviousButton" Width="42" Height="42" HorizontalAlignment="Center" Grid.Row="1" Grid.Column="1" Click="MediaPreviousButton_Click">
+							<TextBlock Name="MediaPreviousText" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="{StaticResource IcoFont}" FontSize="28" TextAlignment="Center" Text="&#xEC78;" Margin="-16,-16,-16,-16"/>
 						</Button>
-						<Button Width="42" Height="42" HorizontalAlignment="Center" Grid.Row="1" Grid.Column="2">
-							<TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="{StaticResource IcoFont}" FontSize="32" TextAlignment="Center" Text="&#xEC74;" Margin="-16,-16,-16,-16"/>
+						<Button Name="MediaPlayButton" Width="42" Height="42" HorizontalAlignment="Center" Grid.Row="1" Grid.Column="2" Click="MediaPlayButton_Click">
+							<TextBlock Name="MediaPlayText" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="{StaticResource IcoFont}" FontSize="32" TextAlignment="Center" Text="&#xEC74;" Margin="-16,-16,-16,-16"/>
 						</Button>
-						<Button Width="42" Height="42" HorizontalAlignment="Center" Grid.Row="1" Grid.Column="3">
-							<TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="{StaticResource IcoFont}" FontSize="28" TextAlignment="Center" Text="&#xEC6E;" Margin="-16,-16,-16,-16"/>
+						<Button Name="MediaNextButton" Width="42" Height="42" HorizontalAlignment="Center" Grid.Row="1" Grid.Column="3" Click="MediaNextButton_Click">
+							<TextBlock Name="MediaNextText" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="{StaticResource IcoFont}" FontSize="28" TextAlignment="Center" Text="&#xEC6E;" Margin="-16,-16,-16,-16"/>
 						</Button>
-						<Button Width="42" Height="42" HorizontalAlignment="Center" Grid.Row="1" Grid.Column="4">
-							<TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="{StaticResource IcoFont}" FontSize="28" TextAlignment="Center" Text="&#xef80;" Margin="-16,-16,-16,-16"/>
+						<Button Name="MediaRepeatButton" Width="42" Height="42" HorizontalAlignment="Center" Grid.Row="1" Grid.Column="4" Click="MediaRepeatButton_Click">
+							<TextBlock Name="MediaRepeatText" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="{StaticResource IcoFont}" FontSize="28" TextAlignment="Center" Text="&#xef80;" Margin="-16,-16,-16,-16"/>
 						</Button>
 					</Grid>
-					<Slider Name="SeekSlider" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" VerticalAlignment="Center"/>
+					<Grid Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3">
+						<Grid.RowDefinitions>
+							<RowDefinition/>
+						</Grid.RowDefinitions>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="64"/>
+							<ColumnDefinition/>
+							<ColumnDefinition Width="64"/>
+						</Grid.ColumnDefinitions>
+						<TextBlock Name="SeekTime" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" TextAlignment="Center" FontSize="14" FontWeight="Medium" Text="0:00"/>
+						<Slider Name="SeekSlider" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" IsTapEnabled="True" IsDoubleTapEnabled="False" PointerPressed="SeekSlider_PointerPressed" Tapped="SeekSlider_Tapped" ManipulationMode="All" ManipulationStarted="SeekSlider_ManipulationStarted" ManipulationCompleted="SeekSlider_ManipulationCompleted"/>
+						<TextBlock Name="SeekDuration" Grid.Row="0" Grid.Column="2" VerticalAlignment="Center" TextAlignment="Center" FontSize="14" FontWeight="Medium" Text="0:00"/>
+					</Grid>
 				</Grid>
-				<Grid Name="VolumeControls" Grid.Column="4">
+				<Grid Grid.Column="4">
 					<Grid.ColumnDefinitions>
 						<ColumnDefinition Width="64"/>
 						<ColumnDefinition/>

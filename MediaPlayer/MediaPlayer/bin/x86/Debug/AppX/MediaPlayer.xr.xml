@@ -24,8 +24,8 @@
       <RootProperty Name="ColumnDefinitions" />
       <RootProperty Name="Background" />
       <RootProperty Name="VerticalAlignment" />
-      <RootProperty Name="Name" />
       <RootProperty Name="RequestedTheme" />
+      <RootProperty Name="Name" />
       <RootEvent Name="Loaded" />
       <RootMethod Name="GetRow" />
       <RootMethod Name="SetRow" />
@@ -114,7 +114,12 @@
       <RootProperty Name="Minimum" />
       <RootProperty Name="Maximum" />
       <RootProperty Name="ManipulationMode" />
+      <RootProperty Name="IsTapEnabled" />
+      <RootProperty Name="IsDoubleTapEnabled" />
       <RootEvent Name="ManipulationCompleted" />
+      <RootEvent Name="PointerPressed" />
+      <RootEvent Name="Tapped" />
+      <RootEvent Name="ManipulationStarted" />
     </RootType>
     <RootType FullName="Microsoft.Xaml.DirectUI.ProxyTypes.StaticResourceExtension" />
     <RootType FullName="Windows.UI.Xaml.Controls.Frame">

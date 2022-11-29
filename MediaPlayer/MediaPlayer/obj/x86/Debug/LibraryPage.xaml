@@ -38,7 +38,7 @@
 			</Grid.ColumnDefinitions>
 			<Grid Grid.Row="1" Grid.Column="1">
 				<Grid VerticalAlignment="Center">
-					<TextBlock TextAlignment="Left" TextWrapping="Wrap" FontSize="96" FontWeight="Bold">Media Library</TextBlock>
+					<TextBlock TextAlignment="Left" TextWrapping="Wrap" FontSize="96" FontWeight="Bold">Library</TextBlock>
 				</Grid>
 			</Grid>
 		</Grid>

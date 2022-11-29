@@ -2,8 +2,13 @@
 using MusicPlayer.Media;
 
 using System;
+using System.Collections.Concurrent;
+using System.Threading.Tasks;
+
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
+using Windows.Foundation;
+using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
@@ -16,6 +21,8 @@ namespace MusicPlayer {
     sealed partial class App : Application {
 
         #region constant
+
+        private static readonly ConcurrentQueue<DispatchedHandler> RunAsyncQueue = new ConcurrentQueue<DispatchedHandler>();
 
         #endregion
 
@@ -32,6 +39,8 @@ namespace MusicPlayer {
         public AudioPlayer AudioPlayer => audioPlayer;
 
         public MediaManager MediaManager => mediaManager;
+
+        public static CoreDispatcher Dispatcher { get; private set; }
 
         #endregion
 
@@ -64,7 +73,13 @@ namespace MusicPlayer {
         /// will be used such as when the application is launched to open a specific file.
         /// </summary>
         /// <param name="e">Details about the launch request and process.</param>
-        protected override void OnLaunched(LaunchActivatedEventArgs e) {
+        protected sealed override void OnLaunched(LaunchActivatedEventArgs e) {
+
+            // update dispatcher:
+            CoreWindow window = CoreWindow.GetForCurrentThread();
+            window.Activate();
+            Dispatcher = window.Dispatcher;
+
             Frame rootFrame = Window.Current.Content as Frame;
 
             // Do not repeat app initialization when the Window already has content,
@@ -123,6 +138,20 @@ namespace MusicPlayer {
             var deferral = e.SuspendingOperation.GetDeferral();
             //TODO: Save application state and stop any background activity
             deferral.Complete();
+        }
+
+        #endregion
+
+        #region QueueRunAsync
+
+        public static async void QueueRunAsync(DispatchedHandler dispatchedHandler) {
+            if (dispatchedHandler == null) throw new ArgumentNullException(nameof(dispatchedHandler));
+            RunAsyncQueue.Enqueue(dispatchedHandler);
+            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () => {
+                while (RunAsyncQueue.TryDequeue(out DispatchedHandler handler)) {
+                    handler.Invoke();
+                }
+            });
         }
 
         #endregion
