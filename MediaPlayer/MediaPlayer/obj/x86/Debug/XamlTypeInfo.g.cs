@@ -13,17 +13,17 @@ namespace MusicPlayer
     public partial class App : global::Windows.UI.Xaml.Markup.IXamlMetadataProvider
     {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Windows.UI.Xaml.Build.Tasks"," 0.0.0.0")]
-        private global::MediaPlayer.MediaPlayer_XamlTypeInfo.XamlMetaDataProvider __appProvider;
+        private global::MusicPlayer.MediaPlayer_XamlTypeInfo.XamlMetaDataProvider __appProvider;
 
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Windows.UI.Xaml.Build.Tasks"," 0.0.0.0")]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private global::MediaPlayer.MediaPlayer_XamlTypeInfo.XamlMetaDataProvider _AppProvider
+        private global::MusicPlayer.MediaPlayer_XamlTypeInfo.XamlMetaDataProvider _AppProvider
         {
             get
             {
                 if (__appProvider == null)
                 {
-                    __appProvider = new global::MediaPlayer.MediaPlayer_XamlTypeInfo.XamlMetaDataProvider();
+                    __appProvider = new global::MusicPlayer.MediaPlayer_XamlTypeInfo.XamlMetaDataProvider();
                 }
                 return __appProvider;
             }
@@ -61,7 +61,7 @@ namespace MusicPlayer
     }
 }
 
-namespace MediaPlayer.MediaPlayer_XamlTypeInfo
+namespace MusicPlayer.MediaPlayer_XamlTypeInfo
 {
     /// <summary>
     /// Main class for providing metadata for the app or library
@@ -70,15 +70,15 @@ namespace MediaPlayer.MediaPlayer_XamlTypeInfo
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     public sealed class XamlMetaDataProvider : global::Windows.UI.Xaml.Markup.IXamlMetadataProvider
     {
-        private global::MediaPlayer.MediaPlayer_XamlTypeInfo.XamlTypeInfoProvider _provider = null;
+        private global::MusicPlayer.MediaPlayer_XamlTypeInfo.XamlTypeInfoProvider _provider = null;
 
-        private global::MediaPlayer.MediaPlayer_XamlTypeInfo.XamlTypeInfoProvider Provider
+        private global::MusicPlayer.MediaPlayer_XamlTypeInfo.XamlTypeInfoProvider Provider
         {
             get
             {
                 if (_provider == null)
                 {
-                    _provider = new global::MediaPlayer.MediaPlayer_XamlTypeInfo.XamlTypeInfoProvider();
+                    _provider = new global::MusicPlayer.MediaPlayer_XamlTypeInfo.XamlTypeInfoProvider();
                 }
                 return _provider;
             }

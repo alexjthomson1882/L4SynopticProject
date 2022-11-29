@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MediaPlayer.Media {
+namespace MusicPlayer.Media {
 
     public sealed class MediaLocation : IDisposable {
 
@@ -8,24 +8,26 @@ namespace MediaPlayer.Media {
 
         private readonly int id;
 
-        private string path;
+        private readonly string path;
+
+        private readonly DateTime dateAdded;
 
         #endregion
 
         #region property
 
-        public string Path {
-            get => path;
-            set => path = value;
-        }
+        public string Path => path;
+        public DateTime DateAdded => dateAdded;
+        public string DateAddedFormatted => dateAdded.ToString("hh:mm:ss dd-MM-yyyy");
 
         #endregion
 
         #region constructor
 
-        internal MediaLocation(in int id, in string path) {
+        internal MediaLocation(in int id, in string path, in DateTime dateAdded) {
             this.id = id;
             this.path = path;
+            this.dateAdded = dateAdded;
         }
 
         #endregion

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace MediaPlayer.Media {
+namespace MusicPlayer.Media {
 
     public sealed class Playlist {
 

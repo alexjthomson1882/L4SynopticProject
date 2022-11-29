@@ -1,17 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
+﻿using MusicPlayer.Media;
+
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
 
 namespace MusicPlayer {
 
@@ -27,6 +18,7 @@ namespace MusicPlayer {
         #region variable
 
         private AudioPlayer audioPlayer;
+        private MediaManager mediaManager;
 
         #endregion
 
@@ -35,6 +27,7 @@ namespace MusicPlayer {
         public MainPage() {
             InitializeComponent();
             audioPlayer = null;
+            mediaManager = null;
         }
 
         #endregion
@@ -44,10 +37,12 @@ namespace MusicPlayer {
         #region PageContent
 
         private void PageContent_Loaded(object sender, RoutedEventArgs e) {
-            // get audio player:
+            // get audio player and media manager:
             App application = Application.Current as App;
             if (application != null) {
                 audioPlayer = application.AudioPlayer;
+                mediaManager = application.MediaManager;
+                mediaManager.Initialise();
             }
             // update controls:
             UpdateVolumeControls();
@@ -90,10 +85,26 @@ namespace MusicPlayer {
 
         #endregion
 
+        #region Playlists
+
+        private void PlaylistsButton_Click(object sender, RoutedEventArgs e) {
+            NavigateTo<ViewPlaylistPage>();
+        }
+
+        #endregion
+
         #region CreatePlaylist
 
         private void CreatePlaylistButton_Click(object sender, RoutedEventArgs e) {
             NavigateTo<ViewPlaylistPage>();
+        }
+
+        #endregion
+
+        #region ScanLocations
+
+        private void ScanLocationsButton_Click(object sender, RoutedEventArgs e) {
+            NavigateTo<ScanLocationsPage>();
         }
 
         #endregion

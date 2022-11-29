@@ -37,7 +37,6 @@
 					<ColumnDefinition/>
 				</Grid.ColumnDefinitions>
 				<Grid.RowDefinitions>
-					<RowDefinition Height="192"/>
 					<RowDefinition/>
 					<RowDefinition Height="256"/>
 				</Grid.RowDefinitions>
@@ -47,61 +46,79 @@
 					</Grid.ColumnDefinitions>
 					<Grid.RowDefinitions>
 						<RowDefinition Height="8"/>
-						<RowDefinition/>
-						<RowDefinition/>
-						<RowDefinition/>
+						<RowDefinition Height="48"/>
+						<RowDefinition Height="48"/>
+						<RowDefinition Height="48"/>
+						<RowDefinition Height="32"/>
+						<RowDefinition Height="48"/>
+						<RowDefinition Height="48"/>
+						<RowDefinition Height="32"/>
+						<RowDefinition Height="48"/>
 						<RowDefinition/>
 						<RowDefinition Height="8"/>
 					</Grid.RowDefinitions>
-					<Grid x:ConnectionId='21' Name="HomeGrid" Grid.Row="1">
+					<Grid Grid.Row="1">
 						<Grid.ColumnDefinitions>
 							<ColumnDefinition Width="64"/>
 							<ColumnDefinition Width="8"/>
 							<ColumnDefinition/>
 						</Grid.ColumnDefinitions>
-						<TextBlock x:ConnectionId='34' Name="HomeIcon" Grid.Column="0" VerticalAlignment="Center" TextAlignment="Right" FontSize="24" FontFamily="{StaticResource IcoFont}" Text="&#xEF47;"/>
-						<TextBlock x:ConnectionId='35' Name="HomeText" Grid.Column="2" VerticalAlignment="Center" TextAlignment="Left" FontSize="16" FontWeight="Bold">Home</TextBlock>
-						<Button x:ConnectionId='36' Name="HomeButton" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"                         />
+						<TextBlock Grid.Column="0" VerticalAlignment="Center" TextAlignment="Right" FontSize="24" FontFamily="{StaticResource IcoFont}" Text="&#xEF47;"/>
+						<TextBlock Grid.Column="2" VerticalAlignment="Center" TextAlignment="Left" FontSize="16" FontWeight="Bold">Home</TextBlock>
+						<Button x:ConnectionId='25' Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"                         />
 					</Grid>
-					<Grid x:ConnectionId='22' Name="SearchGrid" Grid.Row="2">
+					<Grid Grid.Row="2">
 						<Grid.ColumnDefinitions>
 							<ColumnDefinition Width="64"/>
 							<ColumnDefinition Width="8"/>
 							<ColumnDefinition/>
 						</Grid.ColumnDefinitions>
-						<TextBlock x:ConnectionId='31' Name="SearchIcon" Grid.Column="0" VerticalAlignment="Center" TextAlignment="Right" FontSize="24" FontFamily="{StaticResource IcoFont}" Text="&#xEC82;"/>
-						<TextBlock x:ConnectionId='32' Name="SearchText" Grid.Column="2" VerticalAlignment="Center" TextAlignment="Left" FontSize="16" FontWeight="Bold">Search</TextBlock>
-						<Button x:ConnectionId='33' Name="SearchButton" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"                           />
+						<TextBlock Grid.Column="0" VerticalAlignment="Center" TextAlignment="Right" FontSize="24" FontFamily="{StaticResource IcoFont}" Text="&#xEC82;"/>
+						<TextBlock Grid.Column="2" VerticalAlignment="Center" TextAlignment="Left" FontSize="16" FontWeight="Bold">Search</TextBlock>
+						<Button x:ConnectionId='24' Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"                           />
 					</Grid>
-					<Grid x:ConnectionId='23' Name="LibraryGrid" Grid.Row="3">
+					<Grid Grid.Row="3">
 						<Grid.ColumnDefinitions>
 							<ColumnDefinition Width="64"/>
 							<ColumnDefinition Width="8"/>
 							<ColumnDefinition/>
 						</Grid.ColumnDefinitions>
-						<TextBlock x:ConnectionId='28' Name="LibraryIcon" Grid.Column="0" VerticalAlignment="Center" TextAlignment="Right" FontSize="24" FontFamily="{StaticResource IcoFont}" Text="&#xEF65;"/>
-						<TextBlock x:ConnectionId='29' Name="LibraryText" Grid.Column="2" VerticalAlignment="Center" TextAlignment="Left" FontSize="16" FontWeight="Bold">Library</TextBlock>
-						<Button x:ConnectionId='30' Name="LibraryButton" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"                            />
+						<TextBlock Grid.Column="0" VerticalAlignment="Center" TextAlignment="Right" FontSize="24" FontFamily="{StaticResource IcoFont}" Text="&#xEF65;"/>
+						<TextBlock Grid.Column="2" VerticalAlignment="Center" TextAlignment="Left" FontSize="16" FontWeight="Bold">Library</TextBlock>
+						<Button x:ConnectionId='23' Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"                            />
 					</Grid>
-					<Grid x:ConnectionId='24' Name="CreatePlaylistGrid" Grid.Row="4">
+					<Grid Grid.Row="5">
 						<Grid.ColumnDefinitions>
 							<ColumnDefinition Width="64"/>
 							<ColumnDefinition Width="8"/>
 							<ColumnDefinition/>
 						</Grid.ColumnDefinitions>
-						<TextBlock x:ConnectionId='25' Name="CreatePlaylistIcon" Grid.Column="0" VerticalAlignment="Center" TextAlignment="Right" FontSize="24" FontFamily="{StaticResource IcoFont}" Text="&#xEF75;"/>
-						<TextBlock x:ConnectionId='26' Name="CreatePlaylistText" Grid.Column="2" VerticalAlignment="Center" TextAlignment="Left" FontSize="16" FontWeight="Bold">Create Playlist</TextBlock>
-						<Button x:ConnectionId='27' Name="CreatePlaylistButton" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"                                   />
+						<TextBlock Grid.Column="0" VerticalAlignment="Center" TextAlignment="Right" FontSize="24" FontFamily="{StaticResource IcoFont}" Text="&#xEF75;"/>
+						<TextBlock Grid.Column="2" VerticalAlignment="Center" TextAlignment="Left" FontSize="16" FontWeight="Bold">Playlists</TextBlock>
+						<Button x:ConnectionId='22' Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"                              />
+					</Grid>
+					<Grid Grid.Row="6">
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="64"/>
+							<ColumnDefinition Width="8"/>
+							<ColumnDefinition/>
+						</Grid.ColumnDefinitions>
+						<TextBlock Grid.Column="0" VerticalAlignment="Center" TextAlignment="Right" FontSize="24" FontFamily="{StaticResource IcoFont}" Text="&#xEFC1;"/>
+						<TextBlock Grid.Column="2" VerticalAlignment="Center" TextAlignment="Left" FontSize="16" FontWeight="Bold">Create Playlist</TextBlock>
+						<Button x:ConnectionId='21' Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"                                   />
+					</Grid>
+					<Grid Grid.Row="8">
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="64"/>
+							<ColumnDefinition Width="8"/>
+							<ColumnDefinition/>
+						</Grid.ColumnDefinitions>
+						<TextBlock Grid.Column="0" VerticalAlignment="Center" TextAlignment="Right" FontSize="24" FontFamily="{StaticResource IcoFont}" Text="&#xED14;"/>
+						<TextBlock Grid.Column="2" VerticalAlignment="Center" TextAlignment="Left" FontSize="16" FontWeight="Bold">Scan Locations</TextBlock>
+						<Button x:ConnectionId='20' Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"                                  />
 					</Grid>
 				</Grid>
-				<Grid x:ConnectionId='19' Name="NavigationHeirarchy" Grid.Row="1">
-					<ScrollViewer ZoomMode="Disabled" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Visible" HorizontalScrollMode="Auto" HorizontalScrollBarVisibility="Auto">
-						<StackPanel>
-							
-						</StackPanel>
-					</ScrollViewer>
-				</Grid>
-				<Grid x:ConnectionId='20' Name="NavigationPreview" Grid.Row="2" Background="#0a0a0a">
+				<Grid x:ConnectionId='19' Name="NavigationPreview" Grid.Row="2" Background="#0a0a0a">
 					<Image/>
 				</Grid>
 			</Grid>

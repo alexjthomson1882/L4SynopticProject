@@ -70,3 +70,14 @@ D:\Development\Work\Apprenticeship\L4\SynopticProject\MediaPlayer\MediaPlayer\ob
 D:\Development\Work\Apprenticeship\L4\SynopticProject\MediaPlayer\MediaPlayer\bin\x86\Debug\SQLitePCLRaw.batteries_v2.dll
 D:\Development\Work\Apprenticeship\L4\SynopticProject\MediaPlayer\MediaPlayer\bin\x86\Debug\e_sqlite3.dll
 D:\Development\Work\Apprenticeship\L4\SynopticProject\MediaPlayer\MediaPlayer\bin\x86\Debug\SQLitePCLRaw.provider.e_sqlite3.dll
+D:\Development\Work\Apprenticeship\L4\SynopticProject\MediaPlayer\MediaPlayer\bin\x86\Debug\ScanLocationsPage.xbf
+D:\Development\Work\Apprenticeship\L4\SynopticProject\MediaPlayer\MediaPlayer\obj\x86\Debug\ScanLocationsPage.g.i.cs
+D:\Development\Work\Apprenticeship\L4\SynopticProject\MediaPlayer\MediaPlayer\obj\x86\Debug\ScanLocationsPage.g.cs
+D:\Development\Work\Apprenticeship\L4\SynopticProject\MediaPlayer\MediaPlayer\obj\x86\Debug\ScanLocationsPage.xaml
+D:\Development\Work\Apprenticeship\L4\SynopticProject\MediaPlayer\MediaPlayer\obj\x86\Debug\ScanLocationsPage.xbf
+D:\Development\Work\Apprenticeship\L4\SynopticProject\MediaPlayer\MediaPlayer\bin\x86\Debug\Microsoft.Toolkit.Uwp.UI.Controls.DataGrid\Microsoft.Toolkit.Uwp.UI.Controls.DataGrid.xr.xml
+D:\Development\Work\Apprenticeship\L4\SynopticProject\MediaPlayer\MediaPlayer\bin\x86\Debug\Microsoft.Toolkit.Uwp.UI.Controls.DataGrid.dll
+D:\Development\Work\Apprenticeship\L4\SynopticProject\MediaPlayer\MediaPlayer\bin\x86\Debug\Microsoft.Toolkit.Uwp.UI.Controls.DataGrid.pdb
+D:\Development\Work\Apprenticeship\L4\SynopticProject\MediaPlayer\MediaPlayer\obj\x86\Debug\Microsoft.Toolkit.Uwp.UI.Controls.DataGrid.pri.xml
+D:\Development\Work\Apprenticeship\L4\SynopticProject\MediaPlayer\MediaPlayer\obj\x86\Debug\Microsoft.UI.Xaml.pri.xml
+D:\Development\Work\Apprenticeship\L4\SynopticProject\MediaPlayer\MediaPlayer\obj\x86\Debug\Microsoft.Toolkit.Uwp.UI.Controls.DataGrid\en-US\Microsoft.Toolkit.Uwp.UI.Controls.Resources.resw

@@ -1,5 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Roots >
+  <Roots.PropertyPathNames>
+    <RootPropertyPathName Name="DateAddedFormatted" />
+    <RootPropertyPathName Name="DurationFormatted" />
+    <RootPropertyPathName Name="Artist" />
+    <RootPropertyPathName Name="Album" />
+    <RootPropertyPathName Name="Title" />
+    <RootPropertyPathName Name="Path" />
+  </Roots.PropertyPathNames>
   <Roots.RootTypes>
     <RootType FullName="Windows.UI.Xaml.Application">
       <RootProperty Name="Resources" />
@@ -12,12 +20,12 @@
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.Grid">
       <RootProperty Name="Children" />
-      <RootProperty Name="Name" />
-      <RootProperty Name="Background" />
-      <RootProperty Name="RequestedTheme" />
-      <RootProperty Name="ColumnDefinitions" />
       <RootProperty Name="RowDefinitions" />
+      <RootProperty Name="ColumnDefinitions" />
+      <RootProperty Name="Background" />
       <RootProperty Name="VerticalAlignment" />
+      <RootProperty Name="Name" />
+      <RootProperty Name="RequestedTheme" />
       <RootEvent Name="Loaded" />
       <RootMethod Name="GetRow" />
       <RootMethod Name="SetRow" />
@@ -29,20 +37,18 @@
     <RootType FullName="Windows.UI.Xaml.Controls.TextBlock">
       <RootProperty Name="Inlines" />
       <RootProperty Name="Foreground" />
+      <RootProperty Name="TextAlignment" />
+      <RootProperty Name="TextWrapping" />
+      <RootProperty Name="FontSize" />
+      <RootProperty Name="FontWeight" />
       <RootProperty Name="Name" />
       <RootProperty Name="VerticalAlignment" />
       <RootProperty Name="HorizontalAlignment" />
       <RootProperty Name="FontFamily" />
-      <RootProperty Name="FontSize" />
-      <RootProperty Name="TextAlignment" />
       <RootProperty Name="Text" />
       <RootProperty Name="Margin" />
-      <RootProperty Name="FontWeight" />
-      <RootProperty Name="TextWrapping" />
     </RootType>
     <RootType FullName="MusicPlayer.HomePage" />
-    <RootType FullName="MusicPlayer.LibraryPage" />
-    <RootType FullName="Microsoft.Xaml.DirectUI.ProxyTypes.ThemeResourceExtension" />
     <RootType FullName="Windows.UI.Xaml.Controls.Button">
       <RootProperty Name="Name" />
       <RootProperty Name="Width" />
@@ -60,12 +66,44 @@
       <RootProperty Name="Property" />
       <RootProperty Name="Value" />
     </RootType>
-    <RootType FullName="Windows.UI.Xaml.Controls.ColumnDefinition">
-      <RootProperty Name="Width" />
-    </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.RowDefinition">
       <RootProperty Name="Height" />
     </RootType>
+    <RootType FullName="Windows.UI.Xaml.Controls.ColumnDefinition">
+      <RootProperty Name="Width" />
+    </RootType>
+    <RootType FullName="Windows.UI.Xaml.Controls.ScrollViewer">
+      <RootProperty Name="ZoomMode" />
+      <RootProperty Name="VerticalScrollMode" />
+      <RootProperty Name="VerticalScrollBarVisibility" />
+      <RootProperty Name="HorizontalScrollMode" />
+      <RootProperty Name="HorizontalScrollBarVisibility" />
+      <RootProperty Name="Content" />
+    </RootType>
+    <RootType FullName="Microsoft.Toolkit.Uwp.UI.Controls.DataGrid">
+      <RootProperty Name="AutoGenerateColumns" />
+      <RootProperty Name="CanUserSortColumns" />
+      <RootProperty Name="IsReadOnly" />
+      <RootProperty Name="ItemsSource" />
+      <RootProperty Name="SelectionMode" />
+      <RootProperty Name="TabNavigation" />
+      <RootProperty Name="Columns" />
+      <RootEvent Name="Sorting" />
+      <RootEvent Name="SelectionChanged" />
+    </RootType>
+    <RootType FullName="Microsoft.Xaml.DirectUI.ProxyTypes.BindExtension" />
+    <RootType FullName="Microsoft.Toolkit.Uwp.UI.Controls.DataGridTextColumn">
+      <RootProperty Name="Tag" />
+      <RootProperty Name="Header" />
+      <RootProperty Name="CanUserResize" />
+      <RootProperty Name="FontWeight" />
+      <RootProperty Name="MinWidth" />
+      <RootProperty Name="Width" />
+      <RootProperty Name="Binding" />
+    </RootType>
+    <RootType FullName="Windows.UI.Xaml.Data.Binding" />
+    <RootType FullName="MusicPlayer.LibraryPage" />
+    <RootType FullName="Microsoft.Xaml.DirectUI.ProxyTypes.ThemeResourceExtension" />
     <RootType FullName="Windows.UI.Xaml.Shapes.Rectangle">
       <RootProperty Name="Fill" />
     </RootType>
@@ -83,17 +121,10 @@
       <RootProperty Name="Name" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.Image" />
-    <RootType FullName="Windows.UI.Xaml.Controls.ScrollViewer">
-      <RootProperty Name="ZoomMode" />
-      <RootProperty Name="VerticalScrollMode" />
-      <RootProperty Name="VerticalScrollBarVisibility" />
-      <RootProperty Name="HorizontalScrollMode" />
-      <RootProperty Name="HorizontalScrollBarVisibility" />
-      <RootProperty Name="Content" />
-    </RootType>
-    <RootType FullName="Windows.UI.Xaml.Controls.StackPanel" />
     <RootType FullName="MusicPlayer.MainPage" />
+    <RootType FullName="MusicPlayer.ScanLocationsPage" />
     <RootType FullName="MusicPlayer.SearchPage" />
+    <RootType FullName="Windows.UI.Xaml.Controls.StackPanel" />
     <RootType FullName="Windows.UI.Xaml.Controls.InkCanvas">
       <RootProperty Name="Name" />
     </RootType>

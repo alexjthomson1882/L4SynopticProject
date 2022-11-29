@@ -1,12 +1,13 @@
-﻿using MediaPlayer.Data;
+﻿using MusicPlayer.Data;
 
 using Microsoft.Data.Sqlite;
 
 using System;
 using System.Collections.Generic;
 using System.IO;
+using Windows.Storage;
 
-namespace MediaPlayer.Media {
+namespace MusicPlayer.Media {
 
     public sealed class MediaManager {
 
@@ -44,6 +45,19 @@ namespace MediaPlayer.Media {
             trackedMediaLocations = new Dictionary<int, MediaLocation>();
             trackedMedia = new Dictionary<int, AudioMedia>();
             trackedPlaylists = new Dictionary<int, Playlist>();
+        }
+
+        #endregion
+
+        #region logic
+
+        #region Initialise
+
+        public async void Initialise() {
+            StorageLibrary musicLibrary = await StorageLibrary.GetLibraryAsync(KnownLibraryId.Music);
+            foreach (StorageFolder folder in musicLibrary.Folders) {
+                RegisterScanLocation(folder, false);
+            }
             // reload:
             ReloadMediaLocations();
             ReloadLibrary();
@@ -51,8 +65,6 @@ namespace MediaPlayer.Media {
         }
 
         #endregion
-
-        #region logic
 
         #region ReloadMediaLocations
 
@@ -77,14 +89,13 @@ namespace MediaPlayer.Media {
                             // read media location data:
                             int id = query.GetInt32(0);
                             string path = query.GetString(1);
+                            DateTime dateAdded = query.GetDateTime(2);
                             // update media location object:
                             if (trackedMediaLocations.TryGetValue(id, out MediaLocation mediaLocation)) {
-                                mediaLocation.Path = path;
                                 trackedLocations.Remove(id);
                             } else {
                                 mediaLocation = new MediaLocation(
-                                    id,
-                                    path
+                                    id, path, dateAdded
                                 );
                                 trackedMediaLocations[id] = mediaLocation;
                             }
@@ -112,12 +123,20 @@ namespace MediaPlayer.Media {
             // find the paths to media on the system:
             List<string> mediaPaths = new List<string>();
             foreach (MediaLocation mediaLocation in trackedMediaLocations.Values) {
-                foreach (string file in Directory.EnumerateFiles(mediaLocation.Path, "*.*", SearchOption.AllDirectories)) {
-                    // check file extension:
-                    string fileExtension = Path.GetExtension(file);
-                    if (!SupportedFileExtensions.Contains(fileExtension)) continue;
-                    // add to media paths:
-                    mediaPaths.Add(Path.GetFullPath(file).Replace('\\', '/'));
+                try {
+                    foreach (string file in Directory.EnumerateFiles(mediaLocation.Path, "*.*", SearchOption.AllDirectories)) {
+                        // check file extension:
+                        string fileExtension = Path.GetExtension(file);
+                        if (!SupportedFileExtensions.Contains(fileExtension)) continue;
+                        // add to media paths:
+                        mediaPaths.Add(Path.GetFullPath(file).Replace('\\', '/'));
+                    }
+                } catch (UnauthorizedAccessException) {
+                    continue;
+                } catch (DirectoryNotFoundException) {
+                    continue;
+                } catch (FileNotFoundException) {
+                    continue;
                 }
             }
             // connect to database:
@@ -138,10 +157,17 @@ namespace MediaPlayer.Media {
                     }
                     // create sqlite bulk insert command:
                     using (SqliteCommand command = connection.CreateCommand()) {
-                        command.CommandText = @"INSERT INTO Media VALUES (NULL, $value, NULL)";
-                        SqliteParameter parameter = command.CreateParameter();
+                        command.CommandText = @"INSERT INTO Media (MediaId, MediaName, MediaPath, DateAdded) VALUES (NULL, $name, $path, CURRENT_TIMESTAMP)";
+                        SqliteParameter mediaName = command.CreateParameter();
+                        mediaName.ParameterName = "name";
+                        command.Parameters.Add(mediaName);
+                        SqliteParameter mediaPath = command.CreateParameter();
+                        mediaPath.ParameterName = "path";
+                        command.Parameters.Add(mediaPath);
                         for (int i = 0; i < mediaPaths.Count; i++) {
-                            parameter.Value = mediaPaths[i];
+                            string path = mediaPaths[i];
+                            mediaName.Value = Path.GetFileNameWithoutExtension(path).Replace('_', ' ');
+                            mediaPath.Value = path;
                             command.ExecuteNonQuery();
                         }
                     }
@@ -154,15 +180,15 @@ namespace MediaPlayer.Media {
                             int id = query.GetInt32(0);
                             string name = query.GetString(1);
                             string path = query.GetString(2);
+                            DateTime dateAdded = query.GetDateTime(3);
                             // track media:
-                            if (trackedMedia.TryGetValue(id, out AudioMedia media)) {
-                                media.Name = name;
-                                media.Path = path;
-                            } else {
-                                trackedMedia[id] = new AudioMedia(
-                                    id, name, path
+                            if (!trackedMedia.TryGetValue(id, out AudioMedia media)) {
+                                media = new AudioMedia(
+                                    id, name, path, dateAdded
                                 );
+                                trackedMedia[id] = media;
                             }
+                            media.Reload();
                         }
                     }
                     // commit transaction:
@@ -216,6 +242,83 @@ namespace MediaPlayer.Media {
                     // commit transaction:
                     transaction.Commit();
                 }
+            }
+        }
+
+        #endregion
+
+        #region GetMediaList
+
+        /// <summary>
+        /// Constructs a <see cref="List{T}"/> of tracked <see cref="AudioMedia"/> objects.
+        /// </summary>
+        public List<AudioMedia> GetMediaList() {
+            List<AudioMedia> mediaList = new List<AudioMedia>();
+            foreach (AudioMedia media in trackedMedia.Values) {
+                mediaList.Add(media);
+            }
+            return mediaList;
+        }
+
+        #endregion
+
+        #region GetPlaylistList
+
+        /// <summary>
+        /// Constructs a <see cref="List{T}"/> of tracked <see cref="Playlist"/> objects.
+        /// </summary>
+        public List<Playlist> GetPlaylistList() {
+            List<Playlist> playlistList = new List<Playlist>();
+            foreach (Playlist playlist in trackedPlaylists.Values) {
+                playlistList.Add(playlist);
+            }
+            return playlistList;
+        }
+
+        #endregion
+
+        #region GetMediaLocationsList
+
+        /// <summary>
+        /// Constructs a <see cref="List{T}"/> of tracked <see cref="MediaLocation"/> objects.
+        /// </summary>
+        public List<MediaLocation> GetMediaLocationsList() {
+            List<MediaLocation> locationList = new List<MediaLocation>();
+            foreach (MediaLocation location in trackedMediaLocations.Values) {
+                locationList.Add(location);
+            }
+            return locationList;
+        }
+
+        #endregion
+
+        #region RegisterScanLocation
+
+        public void RegisterScanLocation(StorageFolder location, bool refresh = true) {
+            if (location == null) return; // no location added
+            string path = location.Path.Replace('\\', '/');
+            using (SqliteConnection connection = DataAccess.GetConnection()) {
+                connection.Open();
+                using (SqliteTransaction transaction = connection.BeginTransaction()) {
+                    // check if directory already exists in database:
+                    SqliteCommand command = connection.CreateCommand();
+                    command.CommandText = @"SELECT LocationId FROM MediaLocations WHERE LocationPath=$path";
+                    command.Parameters.AddWithValue("path", path);
+                    SqliteDataReader query = command.ExecuteReader();
+                    if (query.HasRows) return; // already contains target
+                    // add location:
+                    command = connection.CreateCommand();
+                    command.CommandText = @"INSERT INTO MediaLocations (LocationId, LocationPath, DateAdded) VALUES (NULL, $path, CURRENT_TIMESTAMP)";
+                    command.Parameters.AddWithValue("path", path);
+                    command.ExecuteNonQuery();
+                    // commit transaction:
+                    transaction.Commit();
+                }
+            }
+            if (refresh) {
+                ReloadMediaLocations();
+                ReloadLibrary();
+                ReloadPlaylists();
             }
         }
 

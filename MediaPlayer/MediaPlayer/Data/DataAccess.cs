@@ -1,12 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 
 using Microsoft.Data.Sqlite;
 
 using Windows.Storage;
 
-namespace MediaPlayer.Data {
+namespace MusicPlayer.Data {
     
     public static class DataAccess {
 

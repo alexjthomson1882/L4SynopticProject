@@ -1,4 +1,9 @@
-﻿using System;
+﻿using MusicPlayer.Media;
+
+using System;
+
+using Windows.Media.Core;
+using Windows.Media.Playback;
 
 namespace MusicPlayer {
 
@@ -21,6 +26,11 @@ namespace MusicPlayer {
         /// <seealso cref="IsMuted"/>
         private bool isMuted = false;
 
+        /// <summary>
+        /// <see cref="MediaPlayer"/> used to play audio.
+        /// </summary>
+        private MediaPlayer mediaPlayer = null;
+
         #endregion
 
         #region property
@@ -39,21 +49,81 @@ namespace MusicPlayer {
                         volume = value;
                     }
                 }
+                mediaPlayer.Volume = Volume;
             }
         }
 
         public bool IsMuted {
             get => isMuted;
-            set => isMuted = value;
+            set {
+                isMuted = value;
+                mediaPlayer.Volume = Volume;
+            }
         }
 
         #endregion
 
         #region constructor
 
+        internal AudioPlayer() {
+            mediaPlayer = new MediaPlayer {
+                AudioCategory = MediaPlayerAudioCategory.Media
+            };
+        }
+
+        #endregion
+
+        #region destructor
+
+        ~AudioPlayer() {
+            mediaPlayer?.Dispose();
+        }
+
         #endregion
 
         #region logic
+
+        #region Play
+
+        public void Play() {
+            if (mediaPlayer.Source == null) {
+                Stop();
+            } else {
+                mediaPlayer.Play();
+            }
+        }
+
+        /// <summary>
+        /// Starts playing the specified <paramref name="audio"/>.
+        /// </summary>
+        public void Play(in AudioMedia audio) {
+            if (audio == null) Stop();
+            mediaPlayer.Pause();
+            mediaPlayer.Source = MediaSource.CreateFromUri(new Uri(audio.Path));
+            mediaPlayer.Play();
+        }
+
+        #endregion
+
+        #region Stop
+
+        /// <summary>
+        /// Stops the current audio being played.
+        /// </summary>
+        public void Stop() {
+            mediaPlayer.Pause();
+            mediaPlayer.Source = null;
+        }
+
+        #endregion
+
+        #region Pause
+
+        public void Pause() {
+            mediaPlayer.Pause();
+        }
+
+        #endregion
 
         #endregion
 
