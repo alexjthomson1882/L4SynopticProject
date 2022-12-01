@@ -142,8 +142,7 @@ namespace MusicPlayer {
 
         private void MediaDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e) {
             if (!(sender is DataGrid dataGrid) || !(dataGrid.SelectedItem is AudioMedia selectedMedia)) return;
-            playbackManager.Play(selectedMedia);
-            playbackManager.Resume();
+            playbackManager.Play(MediaList, MediaList.IndexOf(selectedMedia));
         }
 
         private void MediaDataGrid_Sorting(object sender, DataGridColumnEventArgs e) {
@@ -155,7 +154,8 @@ namespace MusicPlayer {
         #region LibraryDataGrid
 
         private void LibraryDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e) {
-
+            if (!(sender is DataGrid dataGrid) || !(dataGrid.SelectedItem is AudioMedia selectedMedia)) return;
+            playbackManager.Play(LibraryMediaList, LibraryMediaList.IndexOf(selectedMedia));
         }
 
         private void LibraryDataGrid_Sorting(object sender, DataGridColumnEventArgs e) {

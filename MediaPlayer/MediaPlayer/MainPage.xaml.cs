@@ -3,10 +3,12 @@ using MusicPlayer.Playback;
 
 using System;
 
+using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Input;
+using Windows.UI.Xaml.Media;
 
 namespace MusicPlayer {
 
@@ -279,7 +281,13 @@ namespace MusicPlayer {
         #region MediaShuffleButton
 
         private void MediaShuffleButton_Click(object sender, RoutedEventArgs e) {
-
+            bool nextShuffleState = !playbackManager.Shuffle;
+            playbackManager.Shuffle = nextShuffleState;
+            MediaShuffleText.Foreground = new SolidColorBrush(
+                nextShuffleState
+                    ? Colors.White
+                    : Color.FromArgb(255, 77, 77, 77)
+            );
         }
 
         #endregion
@@ -287,7 +295,13 @@ namespace MusicPlayer {
         #region MediaRepeatButton
 
         private void MediaRepeatButton_Click(object sender, RoutedEventArgs e) {
-
+            bool nextRepeatState = !playbackManager.Repeat;
+            playbackManager.Repeat = nextRepeatState;
+            MediaRepeatText.Foreground = new SolidColorBrush(
+                nextRepeatState
+                    ? Colors.White
+                    : Color.FromArgb(255, 77, 77, 77)
+            );
         }
 
         #endregion

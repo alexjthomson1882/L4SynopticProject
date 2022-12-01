@@ -119,6 +119,11 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Media\IMediaPicker.cs" />
+    <Compile Include="Media\SequentialMediaPicker.cs" />
+    <Compile Include="Media\MediaPickerFactory.cs" />
+    <Compile Include="Media\ShuffleMediaPicker.cs" />
+    <Compile Include="Media\SingleMediaPicker.cs" />
     <Compile Include="Playback\AudioPlayer.cs" />
     <Compile Include="Data\DataAccess.cs" />
     <Compile Include="LibraryPage.xaml.cs">
@@ -131,10 +136,8 @@
     <Compile Include="Media\MediaLocation.cs" />
     <Compile Include="Media\MediaManager.cs" />
     <Compile Include="Media\Playlist.cs" />
-    <Compile Include="Playback\AudioSchedule.cs" />
-    <Compile Include="Playback\AudioScheduleInfo.cs" />
     <Compile Include="Playback\PlaybackManager.cs" />
-    <Compile Include="Playback\PlaybackRepeatMode.cs" />
+    <Compile Include="Media\MediaPickerRepeatMode.cs" />
     <Compile Include="PlaylistListPage.xaml.cs">
       <DependentUpon>PlaylistListPage.xaml</DependentUpon>
     </Compile>
@@ -145,6 +148,7 @@
     <Compile Include="PlaylistPage.xaml.cs">
       <DependentUpon>PlaylistPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Utility\ListUtility.cs" />
     <Compile Include="Utility\MediaDataGridUtility.cs" />
   </ItemGroup>
   <ItemGroup>

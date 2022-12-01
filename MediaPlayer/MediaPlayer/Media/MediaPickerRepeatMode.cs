@@ -1,9 +1,9 @@
-﻿namespace MusicPlayer.Playback {
+﻿namespace MusicPlayer.Media {
     
     /// <summary>
-    /// Describes the type of repeat to apply to an <see cref="AudioSchedule"/>.
+    /// Describes the type of repeat to apply to an <see cref="IMediaPicker"/> instance.
     /// </summary>
-    public enum PlaybackRepeatMode {
+    public enum MediaPickerRepeatMode {
 
         /// <summary>
         /// No repeating is applied.
@@ -21,9 +21,9 @@
         RepeatTrack = 2,
 
         /// <summary>
-        /// The current schedule is repeated. This will not respect the original order of songs in shuffle mode but will repeat each song.
+        /// The current list of media is repeated. This will not respect the original order of songs in shuffle mode but will repeat each song.
         /// </summary>
-        RepeatSchedule = 3,
+        RepeatAll = 3,
 
     }
 

@@ -1,6 +1,7 @@
 ﻿using MusicPlayer.Media;
 
 using System;
+using System.Collections.Generic;
 
 namespace MusicPlayer.Playback {
 
@@ -17,9 +18,13 @@ namespace MusicPlayer.Playback {
         private readonly AudioPlayer audioPlayer;
 
         /// <summary>
-        /// <see cref="AudioSchedule"/> used to schedule audio for the <see cref="audioPlayer"/> to play.
+        /// <see cref="IMediaPicker"/> used to pick which <see cref="AudioMedia"/> from a list.
         /// </summary>
-        private readonly AudioSchedule audioSchedule;
+        private IMediaPicker mediaPicker;
+
+        private bool shuffle;
+
+        private bool repeat;
 
         #endregion
 
@@ -30,12 +35,30 @@ namespace MusicPlayer.Playback {
         }
 
         public bool HasMedia {
-            get => audioSchedule.HasMedia;
+            get => mediaPicker != null && mediaPicker.Current != null;
         }
 
         public bool IsMuted {
             get => audioPlayer.IsMuted;
             set => audioPlayer.IsMuted = value;
+        }
+
+        public bool Shuffle {
+            get => shuffle;
+            set {
+                if (value == shuffle) return; // already has target value
+                shuffle = value; // update state
+                RegenerateMediaPicker();
+            }
+        }
+
+        public bool Repeat {
+            get => repeat;
+            set {
+                if (value == repeat) return; // already has target value
+                repeat = value; // update state
+                RegenerateMediaPicker();
+            }
         }
 
         public double Volume {
@@ -44,7 +67,7 @@ namespace MusicPlayer.Playback {
         }
 
         public AudioMedia CurrentMedia {
-            get => audioSchedule.CurrentMedia;
+            get => mediaPicker?.Current;
         }
 
         public double PlaybackPosition {
@@ -100,8 +123,10 @@ namespace MusicPlayer.Playback {
             audioPlayer.OnMediaPlaybackStart += AudioPlayer_OnMediaPlaybackStart; ;
             audioPlayer.OnMediaPlaybackStop += AudioPlayer_OnMediaPlaybackStop; ;
             audioPlayer.OnMediaPlaybackPositionChanged += AudioPlayer_OnMediaPlaybackPositionChanged; ;
-            // create audio schedule:
-            audioSchedule = new AudioSchedule();
+            // initialise media picker variables:
+            mediaPicker = null;
+            shuffle = false;
+            repeat = false;
         }
 
         #endregion
@@ -114,24 +139,101 @@ namespace MusicPlayer.Playback {
         /// Play <paramref name="audio"/> immediatly. This will add the <paramref name="audio"/> to the <see cref="audioSchedule"/> ahead of any
         /// <see cref="CurrentMedia"/>.
         /// </summary>
-        /// <param name="audio"></param>
         public void Play(in AudioMedia audio) {
-            bool wasPlaying = audioPlayer.IsPlaying;
-            audioSchedule.PlayImmediatly(audio);
-            audioPlayer.Play(audio);
-            if (wasPlaying) {
-                audioPlayer.Play();
-            } else {
-                audioPlayer.Pause();
+            // change media picker:
+            ChangeMediaPicker(
+                new List<AudioMedia> { audio }, // audio list
+                0, // start index
+                false, // shuffle
+                repeat ? MediaPickerRepeatMode.RepeatTrack : MediaPickerRepeatMode.None // repeat mode
+            );
+        }
+
+        public void Play(in IList<AudioMedia> audioList, in int startIndex) {
+            if (audioList == null) throw new ArgumentNullException(nameof(audioList));
+            int audioCount = audioList.Count;
+            if (audioCount == 0) { // no tracks
+                ChangeMediaPicker(null, 0, false, MediaPickerRepeatMode.None);
+            } else if (audioCount == 1) { // single track
+                ChangeMediaPicker(
+                    audioList, // audio list
+                    0, // start index
+                    false, // shuffle
+                    repeat ? MediaPickerRepeatMode.RepeatTrack : MediaPickerRepeatMode.None // repeat mode
+                );
+            } else { // multiple tracks
+                ChangeMediaPicker(
+                    audioList, // audio list
+                    startIndex, // start index
+                    shuffle, // shuffle
+                    repeat ? MediaPickerRepeatMode.RepeatAll : MediaPickerRepeatMode.None // repeat mode
+                );
             }
         }
 
         #endregion
 
-        #region ClearSchedule
+        #region RegenerateMediaPicker
 
-        public void ClearSchedule() {
-            audioSchedule.Clear();
+        private void RegenerateMediaPicker() {
+            if (mediaPicker != null && mediaPicker.Current != null) {
+                IList<AudioMedia> mediaList = mediaPicker.MediaList;
+                ChangeMediaPicker(
+                    mediaList,
+                    mediaList.IndexOf(mediaPicker.Current),
+                    shuffle,
+                    !repeat ? MediaPickerRepeatMode.None : mediaList.Count == 1 ? MediaPickerRepeatMode.RepeatTrack : MediaPickerRepeatMode.RepeatAll
+                );
+            } else {
+                ChangeMediaPicker(null, 0, false, MediaPickerRepeatMode.None);
+            }
+        }
+
+        #endregion
+
+        #region ChangeMediaPicker
+
+        /// <summary>
+        /// Changes the current <see cref="mediaPicker"/> based on a set of inputs.
+        /// </summary>
+        private void ChangeMediaPicker(in IList<AudioMedia> mediaList, in int startIndex, in bool shuffle, in MediaPickerRepeatMode repeatMode) {
+            if (mediaList != null) {
+                mediaPicker = MediaPickerFactory.CreateMediaPicker(
+                    mediaList,
+                    startIndex,
+                    shuffle,
+                    repeatMode
+                );
+            } else {
+                mediaPicker = null; // clear the media picker
+            }
+            UpdateAudioPlayer();
+        }
+
+        #endregion
+
+        #region UpdateAudioPlayer
+
+        /// <summary>
+        /// Updates the currently playing <see cref="AudioMedia"/> in the <see cref="audioPlayer"/> based on the current state of the <see cref="mediaPicker"/>.
+        /// </summary>
+        private bool UpdateAudioPlayer() {
+            // null check:
+            if (mediaPicker == null) {
+                audioPlayer.Stop();
+                return false;
+            }
+            // get current media:
+            AudioMedia currentMedia = mediaPicker.Current;
+            if (currentMedia == null) {
+                audioPlayer.Stop();
+                return false;
+            }
+            // play current media:
+            if (audioPlayer.CurrentMedia != currentMedia) {
+                audioPlayer.Play(currentMedia);
+            }
+            return true;
         }
 
         #endregion
@@ -139,12 +241,6 @@ namespace MusicPlayer.Playback {
         #region Resume
 
         public void Resume() {
-            if (!audioPlayer.HasMedia) {
-                AudioMedia audioMedia = audioSchedule.CurrentMedia;
-                if (audioMedia != null) {
-                    audioPlayer.Play(audioMedia);
-                }
-            }
             audioPlayer.Play();
         }
 
@@ -160,18 +256,24 @@ namespace MusicPlayer.Playback {
 
         #region Next
 
-        public void Next() {
-            AudioMedia audioMedia = audioSchedule.Next();
-            audioPlayer.Play(audioMedia);
+        public bool Next() {
+            if (mediaPicker != null && mediaPicker.MoveNext()) {
+                return UpdateAudioPlayer();
+            }
+            audioPlayer.Stop();
+            return false;
         }
 
         #endregion
 
         #region Last
 
-        public void Last() {
-            AudioMedia audioMedia = audioSchedule.Last();
-            audioPlayer.Play(audioMedia);
+        public bool Last() {
+            if (mediaPicker != null && mediaPicker.MoveLast()) {
+                return UpdateAudioPlayer();
+            }
+            audioPlayer.Stop();
+            return false;
         }
 
         #endregion

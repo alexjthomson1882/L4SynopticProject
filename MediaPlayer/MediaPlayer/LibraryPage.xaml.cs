@@ -54,7 +54,7 @@ namespace MusicPlayer {
 
         private void MediaDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e) {
             if (!(sender is DataGrid dataGrid) || !(dataGrid.SelectedItem is AudioMedia selectedMedia)) return;
-            playbackManager.Play(selectedMedia);
+            playbackManager.Play(MediaList, MediaList.IndexOf(selectedMedia));
             playbackManager.Resume();
         }
 

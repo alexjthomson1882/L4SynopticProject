@@ -147,19 +147,59 @@
 							<RowDefinition/>
 						</Grid.RowDefinitions>
 						<Button x:ConnectionId='9' Name="MediaShuffleButton" Width="42" Height="42" HorizontalAlignment="Center" Grid.Row="1" Grid.Column="0"                                 >
-							<TextBlock x:ConnectionId='18' Name="MediaShuffleText" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="{StaticResource IcoFont}" FontSize="28" TextAlignment="Center" Text="&#xEFCF;" Margin="-16,-16,-16,-16"/>
+							<TextBlock x:ConnectionId='18'
+								Name="MediaShuffleText"
+								VerticalAlignment="Center" HorizontalAlignment="Center"
+								FontFamily="{StaticResource IcoFont}" FontSize="28"
+								TextAlignment="Center"
+								Foreground="#4D4D4D"
+								Text="&#xEFCF;"
+								Margin="-16,-16,-16,-16"
+							/>
 						</Button>
 						<Button x:ConnectionId='10' Name="MediaPreviousButton" Width="42" Height="42" HorizontalAlignment="Center" Grid.Row="1" Grid.Column="1"                                  >
-							<TextBlock x:ConnectionId='17' Name="MediaPreviousText" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="{StaticResource IcoFont}" FontSize="28" TextAlignment="Center" Text="&#xEC78;" Margin="-16,-16,-16,-16"/>
+							<TextBlock x:ConnectionId='17'
+								Name="MediaPreviousText"
+								VerticalAlignment="Center" HorizontalAlignment="Center"
+								FontFamily="{StaticResource IcoFont}" FontSize="28"
+								TextAlignment="Center"
+								Foreground="#FFF"
+								Text="&#xEC78;"
+								Margin="-16,-16,-16,-16"
+							/>
 						</Button>
 						<Button x:ConnectionId='11' Name="MediaPlayButton" Width="42" Height="42" HorizontalAlignment="Center" Grid.Row="1" Grid.Column="2"                              >
-							<TextBlock x:ConnectionId='16' Name="MediaPlayText" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="{StaticResource IcoFont}" FontSize="32" TextAlignment="Center" Text="&#xEC74;" Margin="-16,-16,-16,-16"/>
+							<TextBlock x:ConnectionId='16'
+								Name="MediaPlayText"
+								VerticalAlignment="Center" HorizontalAlignment="Center"
+								FontFamily="{StaticResource IcoFont}" FontSize="32"
+								TextAlignment="Center"
+								Foreground="#FFF"
+								Text="&#xEC74;"
+								Margin="-16,-16,-16,-16"
+							/>
 						</Button>
 						<Button x:ConnectionId='12' Name="MediaNextButton" Width="42" Height="42" HorizontalAlignment="Center" Grid.Row="1" Grid.Column="3"                              >
-							<TextBlock x:ConnectionId='15' Name="MediaNextText" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="{StaticResource IcoFont}" FontSize="28" TextAlignment="Center" Text="&#xEC6E;" Margin="-16,-16,-16,-16"/>
+							<TextBlock x:ConnectionId='15'
+								Name="MediaNextText"
+								VerticalAlignment="Center" HorizontalAlignment="Center"
+								FontFamily="{StaticResource IcoFont}" FontSize="28"
+								TextAlignment="Center"
+								Foreground="#FFF"
+								Text="&#xEC6E;"
+								Margin="-16,-16,-16,-16"
+							/>
 						</Button>
 						<Button x:ConnectionId='13' Name="MediaRepeatButton" Width="42" Height="42" HorizontalAlignment="Center" Grid.Row="1" Grid.Column="4"                                >
-							<TextBlock x:ConnectionId='14' Name="MediaRepeatText" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="{StaticResource IcoFont}" FontSize="28" TextAlignment="Center" Text="&#xef80;" Margin="-16,-16,-16,-16"/>
+							<TextBlock x:ConnectionId='14'
+								Name="MediaRepeatText"
+								VerticalAlignment="Center" HorizontalAlignment="Center"
+								FontFamily="{StaticResource IcoFont}" FontSize="28"
+								TextAlignment="Center"
+								Foreground="#4D4D4D"
+								Text="&#xef80;"
+								Margin="-16,-16,-16,-16"
+							/>
 						</Button>
 					</Grid>
 					<Grid Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3">
