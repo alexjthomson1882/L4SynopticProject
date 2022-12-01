@@ -93,6 +93,7 @@ namespace MusicPlayer {
                 SeekSlider.Minimum = 0.0;
                 SeekSlider.Maximum = duration;
                 SeekSlider.Value = position;
+                SeekSlider.DataContext = null;
             }
             // update seek text:
             SeekTime.Text = TimeSpan.FromSeconds(position).ToString(@"mm\:ss");
@@ -115,7 +116,7 @@ namespace MusicPlayer {
         private void SeekSlider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e) {
             if (manualSeekSliderManipulation) {
                 SetPlaybackPosition(SeekSlider.Value, playbackManager.PlaybackDuration);
-            } else {
+            } else if (SeekSlider.DataContext != playbackManager) {
                 playbackManager.PlaybackPosition = SeekSlider.Value;
             }
         }
@@ -144,6 +145,7 @@ namespace MusicPlayer {
             // check if slider is being manually manipulated:
             if (manualSeekSliderManipulation) return;
             // update slider position:
+            SeekSlider.DataContext = playbackManager;
             SetPlaybackPosition(position, duration);
         }
 

@@ -5,10 +5,13 @@ using MusicPlayer.Media;
 using System.Linq;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System;
 
 namespace MusicPlayer.Utility {
 
     public static class MediaDataGridUtility {
+
+        #region HandleSortMediaDataGrid
 
         public static void HandleSortMediaDataGrid(in DataGrid dataGrid, in DataGridColumn column, in IList<AudioMedia> list) {
             // get column tag:
@@ -119,6 +122,41 @@ namespace MusicPlayer.Utility {
                 }
             }
         }
+
+        #endregion
+
+        #region HandleSearchMediaDataGrid
+
+        public static void HandleSearchMediaDataGrid(in DataGrid dataGrid, in IList<AudioMedia> mediaList, in string searchQuery) {
+            if (string.IsNullOrWhiteSpace(searchQuery)) {
+                dataGrid.ItemsSource = mediaList;
+            } else {
+                ObservableCollection<AudioMedia> searchedMedia = SearchMedia(mediaList, searchQuery);
+                dataGrid.ItemsSource = searchedMedia;
+            }
+        }
+
+        #endregion
+
+        #region SearchMedia
+
+        private static ObservableCollection<AudioMedia> SearchMedia(IList<AudioMedia> list, string query) {
+            if (query == null) throw new ArgumentNullException(nameof(query));
+            if (list == null) throw new ArgumentNullException(nameof(list));
+            return new ObservableCollection<AudioMedia>(
+                (
+                    from item in list
+                    where (
+                        item.Title.Contains(query, StringComparison.OrdinalIgnoreCase)
+                        || item.Artist.Contains(query, StringComparison.OrdinalIgnoreCase)
+                        || item.Artist.Contains(query, StringComparison.OrdinalIgnoreCase)
+                    )
+                    select item
+                ).ToArray()
+            );
+        }
+
+        #endregion
 
     }
 

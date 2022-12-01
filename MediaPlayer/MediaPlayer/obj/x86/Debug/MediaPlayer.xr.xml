@@ -26,13 +26,13 @@
       <RootProperty Name="TextWrapping" />
       <RootProperty Name="FontSize" />
       <RootProperty Name="FontWeight" />
-      <RootProperty Name="Inlines" />
+      <RootProperty Name="Text" />
       <RootProperty Name="Name" />
       <RootProperty Name="VerticalAlignment" />
       <RootProperty Name="HorizontalAlignment" />
       <RootProperty Name="FontFamily" />
-      <RootProperty Name="Text" />
       <RootProperty Name="Margin" />
+      <RootProperty Name="Inlines" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.Button">
       <RootProperty Name="Name" />
@@ -60,7 +60,6 @@
       <RootProperty Name="ColumnDefinitions" />
       <RootProperty Name="Children" />
       <RootProperty Name="Background" />
-      <RootProperty Name="VerticalAlignment" />
       <RootProperty Name="RequestedTheme" />
       <RootEvent Name="Loaded" />
       <RootMethod Name="GetRow" />
@@ -77,6 +76,7 @@
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.ColumnDefinition">
       <RootProperty Name="Width" />
+      <RootProperty Name="MinWidth" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.ScrollViewer">
       <RootProperty Name="ZoomMode" />
@@ -129,7 +129,6 @@
     <RootType FullName="Windows.UI.Xaml.Controls.Frame">
       <RootProperty Name="Name" />
     </RootType>
-    <RootType FullName="Windows.UI.Xaml.Controls.Image" />
     <RootType FullName="MusicPlayer.MainPage" />
     <RootType FullName="MusicPlayer.PlaylistListPage" />
     <RootType FullName="MusicPlayer.ScanLocationsPage" />
@@ -149,12 +148,22 @@
       <RootProperty Name="Text" />
       <RootEvent Name="Click" />
     </RootType>
+    <RootType FullName="Windows.UI.Xaml.Controls.AutoSuggestBox">
+      <RootProperty Name="Name" />
+      <RootProperty Name="PlaceholderText" />
+      <RootProperty Name="QueryIcon" />
+      <RootEvent Name="TextChanged" />
+      <RootEvent Name="QuerySubmitted" />
+    </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.TextBox">
       <RootProperty Name="Name" />
       <RootProperty Name="TextAlignment" />
       <RootProperty Name="TextWrapping" />
       <RootProperty Name="FontSize" />
       <RootProperty Name="FontWeight" />
+      <RootProperty Name="Foreground" />
+      <RootProperty Name="Background" />
+      <RootProperty Name="BorderThickness" />
       <RootProperty Name="Text" />
       <RootEvent Name="TextChanged" />
     </RootType>

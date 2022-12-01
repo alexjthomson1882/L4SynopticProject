@@ -27,33 +27,45 @@
 		</Grid.ColumnDefinitions>
 		<Grid Grid.Row="0" Grid.Column="0">
 			<Grid.RowDefinitions>
-				<RowDefinition Height="16"/>
-				<RowDefinition Height="64"/>
-				<RowDefinition Height="128"/>
-				<RowDefinition Height="64"/>
+				<RowDefinition Height="8"/>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="Auto"/>
 				<RowDefinition Height="16"/>
 			</Grid.RowDefinitions>
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="32"/>
 				<ColumnDefinition/>
+				<ColumnDefinition Width="Auto"/>
 				<ColumnDefinition Width="32"/>
 			</Grid.ColumnDefinitions>
-			<Grid Grid.Row="2" Grid.Column="1">
-				<Grid VerticalAlignment="Center">
-					<TextBox x:ConnectionId='7' Name="PlaylistNameTextBox" TextAlignment="Left" TextWrapping="Wrap" FontSize="96" FontWeight="Bold" Text="Playlist Name"                                              />
-				</Grid>
+			<Grid Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2">
+				<TextBox x:ConnectionId='9'
+					Name="PlaylistNameTextBox"
+					TextAlignment="Left" TextWrapping="Wrap"
+					FontSize="96" FontWeight="Bold" Foreground="#FFF" Background="Transparent" BorderThickness="0"
+					Text="Playlist Name"
+					                                             
+				/>
 			</Grid>
-			<Grid Grid.Row="3" Grid.Column="1">
+			<Grid Grid.Row="2" Grid.Column="1">
+				<TextBlock
+					TextAlignment="Left" TextWrapping="Wrap"
+					FontSize="16" FontWeight="Light" Foreground="#B1B1B1"
+					Text="Play and manage your playlist here. Right click a track for options. To rename the playlist, click the playlist name and start typing."
+				/>
+			</Grid>
+			<Grid Grid.Row="2" Grid.Column="2">
 				<Grid.RowDefinitions>
 					<RowDefinition/>
 				</Grid.RowDefinitions>
 				<Grid.ColumnDefinitions>
-					<ColumnDefinition Width="Auto"/>
 					<ColumnDefinition/>
+					<ColumnDefinition Width="Auto"/>
 				</Grid.ColumnDefinitions>
-				<Button x:ConnectionId='6'
-					Name="DeletePlaylistButton" Grid.Row="0" Grid.Column="0"
+				<Button x:ConnectionId='8'
+					Name="DeletePlaylistButton" Grid.Row="0" Grid.Column="1"
 					Background="#0a0a0a" Foreground="#FFF"
+					VerticalAlignment="Bottom"
 					FontSize="20" FontWeight="Bold"
 					                                  
 				>
@@ -63,38 +75,79 @@
 		</Grid>
 		<Grid Grid.Row="1" Grid.Column="0" Background="#111">
 			<Grid.RowDefinitions>
+				<RowDefinition Height="32"/>
 				<RowDefinition/>
+				<RowDefinition Height="32"/>
 			</Grid.RowDefinitions>
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="32"/>
 				<ColumnDefinition/>
 				<ColumnDefinition Width="32"/>
 			</Grid.ColumnDefinitions>
-			<Grid Grid.Row="0" Grid.Column="1">
+			<Grid Grid.Row="1" Grid.Column="1">
 				<Grid.RowDefinitions>
 					<RowDefinition Height="32"/>
 					<RowDefinition/>
 				</Grid.RowDefinitions>
 				<Grid.ColumnDefinitions>
 					<ColumnDefinition Width="0.75*"/>
-					<ColumnDefinition Width="8"/>
+					<ColumnDefinition Width="2"/>
 					<ColumnDefinition Width="0.25*"/>
 				</Grid.ColumnDefinitions>
 				<controls:GridSplitter Grid.Row="0" Grid.Column="1" Grid.RowSpan="2" ResizeBehavior="BasedOnAlignment" ResizeDirection="Columns">
 					<controls:GridSplitter.Element>
-						<Grid>
-						</Grid>
+						<Grid Background="#B2B2B2"/>
 					</controls:GridSplitter.Element>
 				</controls:GridSplitter>
 				<Grid Grid.Row="0" Grid.Column="0" Background="#0a0a0a">
-					<TextBlock Foreground="#FFF" FontSize="18" FontWeight="Bold" VerticalAlignment="Center" TextAlignment="Left" Margin="12,0,12,0">
-						Playlist
-					</TextBlock>
+					<Grid.RowDefinitions>
+						<RowDefinition/>
+					</Grid.RowDefinitions>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="Auto"/>
+						<ColumnDefinition/>
+						<ColumnDefinition MinWidth="128" Width="256"/>
+					</Grid.ColumnDefinitions>
+					<TextBlock
+						Grid.Row="0" Grid.Column="0"
+						Foreground="#FFF"
+						FontSize="18" FontWeight="Bold"
+						VerticalAlignment="Center" TextAlignment="Left"
+						Margin="12,0,12,0"
+						Text="Playlist"
+					/>
+					<AutoSuggestBox x:ConnectionId='7'
+						Name="PlaylistSearchBox"
+						Grid.Row="0" Grid.Column="2"
+						PlaceholderText="Search Playlist" QueryIcon="Find"
+						                                           
+						                                                 
+					/>
 				</Grid>
 				<Grid Grid.Row="0" Grid.Column="2" Background="#0a0a0a">
-					<TextBlock Foreground="#FFF" FontSize="18" FontWeight="Bold" VerticalAlignment="Center" TextAlignment="Left" Margin="12,0,12,0">
-						Library
-					</TextBlock>
+					<Grid.RowDefinitions>
+						<RowDefinition/>
+					</Grid.RowDefinitions>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="Auto"/>
+						<ColumnDefinition/>
+						<ColumnDefinition MinWidth="128" Width="256"/>
+					</Grid.ColumnDefinitions>
+					<TextBlock
+						Grid.Row="0" Grid.Column="0"
+						Foreground="#FFF"
+						FontSize="18" FontWeight="Bold"
+						VerticalAlignment="Center" TextAlignment="Left"
+						Margin="12,0,12,0"
+						Text="Library"
+					/>
+					<AutoSuggestBox x:ConnectionId='6'
+						Name="LibrarySearchBox"
+						Grid.Row="0" Grid.Column="2"
+						PlaceholderText="Search Playlist" QueryIcon="Find"
+						                                          
+						                                                
+					/>
 				</Grid>
 				<Grid Grid.Row="1" Grid.Column="0">
 					<ScrollViewer ZoomMode="Disabled" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Visible" HorizontalScrollMode="Disabled" HorizontalScrollBarVisibility="Disabled">

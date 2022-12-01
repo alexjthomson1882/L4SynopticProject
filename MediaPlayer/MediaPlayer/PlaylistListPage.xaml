@@ -27,8 +27,9 @@
 		</Grid.ColumnDefinitions>
 		<Grid Grid.Row="0" Grid.Column="0">
 			<Grid.RowDefinitions>
-				<RowDefinition Height="16"/>
-				<RowDefinition Height="256"/>
+				<RowDefinition Height="8"/>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="Auto"/>
 				<RowDefinition Height="16"/>
 			</Grid.RowDefinitions>
 			<Grid.ColumnDefinitions>
@@ -37,19 +38,32 @@
 				<ColumnDefinition Width="32"/>
 			</Grid.ColumnDefinitions>
 			<Grid Grid.Row="1" Grid.Column="1">
-				<Grid VerticalAlignment="Center">
-					<TextBlock TextAlignment="Left" TextWrapping="Wrap" FontSize="96" FontWeight="Bold">Playlists</TextBlock>
-				</Grid>
+				<TextBlock
+					TextAlignment="Left" TextWrapping="Wrap"
+					FontSize="96" FontWeight="Bold" Foreground="#FFF"
+					Text="Playlists"
+				/>
+			</Grid>
+			<Grid Grid.Row="2" Grid.Column="1">
+				<TextBlock
+					TextAlignment="Left" TextWrapping="Wrap"
+					FontSize="16" FontWeight="Light" Foreground="#B1B1B1"
+					Text="Every playlist created will appear here. Tap a playlist to or create a new playlist if none appear."
+				/>
 			</Grid>
 		</Grid>
 		<Grid Grid.Row="1" Grid.Column="0" Background="#111">
 			<Grid.RowDefinitions>
+				<RowDefinition Height="32"/>
 				<RowDefinition/>
+				<RowDefinition Height="32"/>
 			</Grid.RowDefinitions>
 			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="32"/>
 				<ColumnDefinition/>
+				<ColumnDefinition Width="32"/>
 			</Grid.ColumnDefinitions>
-			<Grid Grid.Row="0" Grid.Column="0">
+			<Grid Grid.Row="1" Grid.Column="1">
 				<ScrollViewer ZoomMode="Disabled" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Visible" HorizontalScrollMode="Disabled" HorizontalScrollBarVisibility="Disabled">
 					<controls:DataGrid x:Name="MediaDataGrid" AutoGenerateColumns="False" CanUserSortColumns="True" IsReadOnly="True" ItemsSource="{x:Bind PlaylistList}" SelectionMode="Single" TabNavigation="Cycle" Sorting="MediaDataGrid_Sorting" SelectionChanged="MediaDataGrid_SelectionChanged">
 						<controls:DataGrid.Columns>

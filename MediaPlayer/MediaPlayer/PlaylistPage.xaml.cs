@@ -7,6 +7,7 @@ using MusicPlayer.Utility;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
@@ -153,12 +154,12 @@ namespace MusicPlayer {
 
         #region LibraryDataGrid
 
-        private void LibraryDataGrid_Sorting(object sender, DataGridColumnEventArgs e) {
-            MediaDataGridUtility.HandleSortMediaDataGrid(LibraryDataGrid, e.Column, LibraryMediaList);
-        }
-
         private void LibraryDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e) {
 
+        }
+
+        private void LibraryDataGrid_Sorting(object sender, DataGridColumnEventArgs e) {
+            MediaDataGridUtility.HandleSortMediaDataGrid(LibraryDataGrid, e.Column, LibraryMediaList);
         }
 
         #endregion
@@ -179,6 +180,34 @@ namespace MusicPlayer {
             AudioMedia audioMedia = (sender as FrameworkElement).DataContext as AudioMedia;
             mediaManager.RemoveAudioMediaFromPlaylist(audioMedia, playlist);
             UpdatePlaylistInfo();
+        }
+
+        #endregion
+
+        #region PlaylistSearchBox
+
+        private void PlaylistSearchBox_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args) {
+            if (args.Reason == AutoSuggestionBoxTextChangeReason.UserInput) {
+                MediaDataGridUtility.HandleSearchMediaDataGrid(MediaDataGrid, MediaList, PlaylistSearchBox.Text);
+            }
+        }
+
+        private void PlaylistSearchBox_QuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args) {
+            MediaDataGridUtility.HandleSearchMediaDataGrid(MediaDataGrid, MediaList, PlaylistSearchBox.Text);
+        }
+
+        #endregion
+
+        #region LibrarySearchBox
+
+        private void LibrarySearchBox_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args) {
+            if (args.Reason == AutoSuggestionBoxTextChangeReason.UserInput) {
+                MediaDataGridUtility.HandleSearchMediaDataGrid(LibraryDataGrid, LibraryMediaList, LibrarySearchBox.Text);
+            }
+        }
+
+        private void LibrarySearchBox_QuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args) {
+            MediaDataGridUtility.HandleSearchMediaDataGrid(LibraryDataGrid, LibraryMediaList, LibrarySearchBox.Text);
         }
 
         #endregion

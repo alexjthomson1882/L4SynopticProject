@@ -37,66 +37,54 @@
 					<ColumnDefinition/>
 				</Grid.ColumnDefinitions>
 				<Grid.RowDefinitions>
+					<RowDefinition Height="8"/>
+					<RowDefinition Height="48"/>
+					<RowDefinition Height="48"/>
+					<RowDefinition Height="48"/>
+					<RowDefinition Height="32"/>
+					<RowDefinition Height="48"/>
 					<RowDefinition/>
-					<RowDefinition Height="256"/>
+					<RowDefinition Height="8"/>
 				</Grid.RowDefinitions>
-				<Grid Grid.Row="0">
+				<Grid Grid.Row="1">
 					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="64"/>
+						<ColumnDefinition Width="8"/>
 						<ColumnDefinition/>
 					</Grid.ColumnDefinitions>
-					<Grid.RowDefinitions>
-						<RowDefinition Height="8"/>
-						<RowDefinition Height="48"/>
-						<RowDefinition Height="48"/>
-						<RowDefinition Height="48"/>
-						<RowDefinition Height="32"/>
-						<RowDefinition Height="48"/>
-						<RowDefinition/>
-						<RowDefinition Height="8"/>
-					</Grid.RowDefinitions>
-					<Grid Grid.Row="1">
-						<Grid.ColumnDefinitions>
-							<ColumnDefinition Width="64"/>
-							<ColumnDefinition Width="8"/>
-							<ColumnDefinition/>
-						</Grid.ColumnDefinitions>
-						<TextBlock Grid.Column="0" VerticalAlignment="Center" TextAlignment="Right" FontSize="24" FontFamily="{StaticResource IcoFont}" Text="&#xEF65;"/>
-						<TextBlock Grid.Column="2" VerticalAlignment="Center" TextAlignment="Left" FontSize="16" FontWeight="Bold">Library</TextBlock>
-						<Button Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="LibraryButton_Click"/>
-					</Grid>
-					<Grid Grid.Row="2">
-						<Grid.ColumnDefinitions>
-							<ColumnDefinition Width="64"/>
-							<ColumnDefinition Width="8"/>
-							<ColumnDefinition/>
-						</Grid.ColumnDefinitions>
-						<TextBlock Grid.Column="0" VerticalAlignment="Center" TextAlignment="Right" FontSize="24" FontFamily="{StaticResource IcoFont}" Text="&#xEF75;"/>
-						<TextBlock Grid.Column="2" VerticalAlignment="Center" TextAlignment="Left" FontSize="16" FontWeight="Bold">Playlists</TextBlock>
-						<Button Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="PlaylistsButton_Click"/>
-					</Grid>
-					<Grid Grid.Row="3">
-						<Grid.ColumnDefinitions>
-							<ColumnDefinition Width="64"/>
-							<ColumnDefinition Width="8"/>
-							<ColumnDefinition/>
-						</Grid.ColumnDefinitions>
-						<TextBlock Grid.Column="0" VerticalAlignment="Center" TextAlignment="Right" FontSize="24" FontFamily="{StaticResource IcoFont}" Text="&#xEFC1;"/>
-						<TextBlock Grid.Column="2" VerticalAlignment="Center" TextAlignment="Left" FontSize="16" FontWeight="Bold">Create Playlist</TextBlock>
-						<Button Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="CreatePlaylistButton_Click"/>
-					</Grid>
-					<Grid Grid.Row="5">
-						<Grid.ColumnDefinitions>
-							<ColumnDefinition Width="64"/>
-							<ColumnDefinition Width="8"/>
-							<ColumnDefinition/>
-						</Grid.ColumnDefinitions>
-						<TextBlock Grid.Column="0" VerticalAlignment="Center" TextAlignment="Right" FontSize="24" FontFamily="{StaticResource IcoFont}" Text="&#xED14;"/>
-						<TextBlock Grid.Column="2" VerticalAlignment="Center" TextAlignment="Left" FontSize="16" FontWeight="Bold">Scan Locations</TextBlock>
-						<Button Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="ScanLocationsButton_Click"/>
-					</Grid>
+					<TextBlock Grid.Column="0" VerticalAlignment="Center" TextAlignment="Right" FontSize="24" FontFamily="{StaticResource IcoFont}" Text="&#xEF65;"/>
+					<TextBlock Grid.Column="2" VerticalAlignment="Center" TextAlignment="Left" FontSize="16" FontWeight="Bold">Library</TextBlock>
+					<Button Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="LibraryButton_Click"/>
 				</Grid>
-				<Grid Grid.Row="2" Background="#0a0a0a">
-					<Image/>
+				<Grid Grid.Row="2">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="64"/>
+						<ColumnDefinition Width="8"/>
+						<ColumnDefinition/>
+					</Grid.ColumnDefinitions>
+					<TextBlock Grid.Column="0" VerticalAlignment="Center" TextAlignment="Right" FontSize="24" FontFamily="{StaticResource IcoFont}" Text="&#xEF75;"/>
+					<TextBlock Grid.Column="2" VerticalAlignment="Center" TextAlignment="Left" FontSize="16" FontWeight="Bold">Playlists</TextBlock>
+					<Button Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="PlaylistsButton_Click"/>
+				</Grid>
+				<Grid Grid.Row="3">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="64"/>
+						<ColumnDefinition Width="8"/>
+						<ColumnDefinition/>
+					</Grid.ColumnDefinitions>
+					<TextBlock Grid.Column="0" VerticalAlignment="Center" TextAlignment="Right" FontSize="24" FontFamily="{StaticResource IcoFont}" Text="&#xEFC1;"/>
+					<TextBlock Grid.Column="2" VerticalAlignment="Center" TextAlignment="Left" FontSize="16" FontWeight="Bold">Create Playlist</TextBlock>
+					<Button Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="CreatePlaylistButton_Click"/>
+				</Grid>
+				<Grid Grid.Row="5">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="64"/>
+						<ColumnDefinition Width="8"/>
+						<ColumnDefinition/>
+					</Grid.ColumnDefinitions>
+					<TextBlock Grid.Column="0" VerticalAlignment="Center" TextAlignment="Right" FontSize="24" FontFamily="{StaticResource IcoFont}" Text="&#xED14;"/>
+					<TextBlock Grid.Column="2" VerticalAlignment="Center" TextAlignment="Left" FontSize="16" FontWeight="Bold">Scan Locations</TextBlock>
+					<Button Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="ScanLocationsButton_Click"/>
 				</Grid>
 			</Grid>
 			<Grid Grid.Column="1" Background="#121212">

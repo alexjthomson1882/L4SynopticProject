@@ -65,6 +65,8 @@ namespace MusicPlayer.Media {
 
         #endregion
 
+        #region logic
+
         #region GetStorageFile
 
         public async Task<StorageFile> GetStorageFile() {
@@ -85,6 +87,14 @@ namespace MusicPlayer.Media {
             Artist = musicProperties.Artist;
             Duration = musicProperties.Duration;
         }
+
+        #endregion
+
+        #region ToString
+
+        public sealed override string ToString() => Title;
+
+        #endregion
 
         #endregion
 

@@ -27,8 +27,9 @@
 		</Grid.ColumnDefinitions>
 		<Grid Grid.Row="0" Grid.Column="0">
 			<Grid.RowDefinitions>
-				<RowDefinition Height="16"/>
-				<RowDefinition Height="256"/>
+				<RowDefinition Height="8"/>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="Auto"/>
 				<RowDefinition Height="16"/>
 			</Grid.RowDefinitions>
 			<Grid.ColumnDefinitions>
@@ -37,19 +38,32 @@
 				<ColumnDefinition Width="32"/>
 			</Grid.ColumnDefinitions>
 			<Grid Grid.Row="1" Grid.Column="1">
-				<Grid VerticalAlignment="Center">
-					<TextBlock x:ConnectionId='3' Name="PlaylistNameEditorText" TextAlignment="Left" TextWrapping="Wrap" FontSize="96" FontWeight="Bold">Scan Locations</TextBlock>
-				</Grid>
+				<TextBlock
+					TextAlignment="Left" TextWrapping="Wrap"
+					FontSize="96" FontWeight="Bold" Foreground="#FFF"
+					Text="Scan Locations"
+				/>
+			</Grid>
+			<Grid Grid.Row="2" Grid.Column="1">
+				<TextBlock
+					TextAlignment="Left" TextWrapping="Wrap"
+					FontSize="16" FontWeight="Light" Foreground="#B1B1B1"
+					Text="Every directory that the music player application scans for music in are listed here. These directories are found by searching the users Music library. To add locations here, add directories to your Windows music library."
+				/>
 			</Grid>
 		</Grid>
 		<Grid Grid.Row="1" Grid.Column="0" Background="#111">
 			<Grid.RowDefinitions>
+				<RowDefinition Height="32"/>
 				<RowDefinition/>
+				<RowDefinition Height="32"/>
 			</Grid.RowDefinitions>
 			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="32"/>
 				<ColumnDefinition/>
+				<ColumnDefinition Width="32"/>
 			</Grid.ColumnDefinitions>
-			<Grid Grid.Row="0" Grid.Column="0">
+			<Grid Grid.Row="1" Grid.Column="1">
 				<ScrollViewer ZoomMode="Disabled" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Visible" HorizontalScrollMode="Disabled" HorizontalScrollBarVisibility="Disabled">
 					<controls:DataGrid x:ConnectionId='2' x:Name="mediaDataGrid" AutoGenerateColumns="False" IsReadOnly="True"                                     >
 						<controls:DataGrid.Columns>

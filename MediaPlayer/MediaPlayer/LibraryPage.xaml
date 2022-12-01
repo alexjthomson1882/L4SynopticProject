@@ -27,8 +27,9 @@
 		</Grid.ColumnDefinitions>
 		<Grid Grid.Row="0" Grid.Column="0">
 			<Grid.RowDefinitions>
-				<RowDefinition Height="16"/>
-				<RowDefinition Height="256"/>
+				<RowDefinition Height="8"/>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="Auto"/>
 				<RowDefinition Height="16"/>
 			</Grid.RowDefinitions>
 			<Grid.ColumnDefinitions>
@@ -37,19 +38,32 @@
 				<ColumnDefinition Width="32"/>
 			</Grid.ColumnDefinitions>
 			<Grid Grid.Row="1" Grid.Column="1">
-				<Grid VerticalAlignment="Center">
-					<TextBlock TextAlignment="Left" TextWrapping="Wrap" FontSize="96" FontWeight="Bold">Library</TextBlock>
-				</Grid>
+				<TextBlock
+					TextAlignment="Left" TextWrapping="Wrap"
+					FontSize="96" FontWeight="Bold" Foreground="#FFF"
+					Text="Library"
+				/>
+			</Grid>
+			<Grid Grid.Row="2" Grid.Column="1">
+				<TextBlock
+					TextAlignment="Left" TextWrapping="Wrap"
+					FontSize="16" FontWeight="Light" Foreground="#B1B1B1"
+					Text="Every song tracked by the music player application is listed here."
+				/>
 			</Grid>
 		</Grid>
 		<Grid Grid.Row="1" Grid.Column="0" Background="#111">
 			<Grid.RowDefinitions>
+				<RowDefinition Height="32"/>
 				<RowDefinition/>
+				<RowDefinition Height="32"/>
 			</Grid.RowDefinitions>
 			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="32"/>
 				<ColumnDefinition/>
+				<ColumnDefinition Width="32"/>
 			</Grid.ColumnDefinitions>
-			<Grid Grid.Row="0" Grid.Column="0">
+			<Grid Grid.Row="1" Grid.Column="1">
 				<ScrollViewer ZoomMode="Disabled" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Visible" HorizontalScrollMode="Disabled" HorizontalScrollBarVisibility="Disabled">
 					<controls:DataGrid x:Name="MediaDataGrid" AutoGenerateColumns="False" CanUserSortColumns="True" IsReadOnly="True" ItemsSource="{x:Bind MediaList}" Sorting="MediaDataGrid_Sorting" SelectionMode="Single" TabNavigation="Cycle" SelectionChanged="MediaDataGrid_SelectionChanged">
 						<controls:DataGrid.Columns>
