@@ -30,13 +30,13 @@
     <AppXManifest Include="D:\Development\Work\Apprenticeship\L4\SynopticProject\MediaPlayer\MediaPlayer\bin\x86\Debug\Core\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2022-12-01T22:00:42.528</Modified>
+      <Modified>2022-12-01T22:26:34.621</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
     <AppxPackagedFile Include="D:\Development\Work\Apprenticeship\L4\SynopticProject\MediaPlayer\MediaPlayer\bin\x86\Debug\MediaPlayer.exe">
       <PackagePath>entrypoint\MediaPlayer.exe</PackagePath>
-      <Modified>2022-12-01T22:00:41.590</Modified>
+      <Modified>2022-12-01T22:26:33.679</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\alext\.nuget\packages\colorcode.core\2.0.6\lib\netstandard1.4\ColorCode.Core.dll">
       <PackagePath>ColorCode.Core.dll</PackagePath>
@@ -210,27 +210,27 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Development\Work\Apprenticeship\L4\SynopticProject\MediaPlayer\MediaPlayer\bin\x86\Debug\App.xbf">
       <PackagePath>App.xbf</PackagePath>
-      <Modified>2022-12-01T22:00:41.508</Modified>
+      <Modified>2022-12-01T22:26:33.596</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Development\Work\Apprenticeship\L4\SynopticProject\MediaPlayer\MediaPlayer\bin\x86\Debug\LibraryPage.xbf">
       <PackagePath>LibraryPage.xbf</PackagePath>
-      <Modified>2022-12-01T22:00:41.508</Modified>
+      <Modified>2022-12-01T22:26:33.596</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Development\Work\Apprenticeship\L4\SynopticProject\MediaPlayer\MediaPlayer\bin\x86\Debug\MainPage.xbf">
       <PackagePath>MainPage.xbf</PackagePath>
-      <Modified>2022-12-01T22:00:41.501</Modified>
+      <Modified>2022-12-01T22:26:33.589</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Development\Work\Apprenticeship\L4\SynopticProject\MediaPlayer\MediaPlayer\bin\x86\Debug\PlaylistListPage.xbf">
       <PackagePath>PlaylistListPage.xbf</PackagePath>
-      <Modified>2022-12-01T22:00:41.508</Modified>
+      <Modified>2022-12-01T22:26:33.596</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Development\Work\Apprenticeship\L4\SynopticProject\MediaPlayer\MediaPlayer\bin\x86\Debug\ScanLocationsPage.xbf">
       <PackagePath>ScanLocationsPage.xbf</PackagePath>
-      <Modified>2022-12-01T22:00:41.508</Modified>
+      <Modified>2022-12-01T22:26:33.596</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Development\Work\Apprenticeship\L4\SynopticProject\MediaPlayer\MediaPlayer\bin\x86\Debug\PlaylistPage.xbf">
       <PackagePath>PlaylistPage.xbf</PackagePath>
-      <Modified>2022-12-01T22:00:41.508</Modified>
+      <Modified>2022-12-01T22:26:33.596</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Program Files %28x86%29\Microsoft SDKs\Windows Kits\10\ExtensionSDKs\Microsoft.UniversalCRT.Debug\10.0.22000.0\\redist\Debug\x86\ucrtbased.dll">
       <PackagePath>ucrtbased.dll</PackagePath>
@@ -246,7 +246,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Development\Work\Apprenticeship\L4\SynopticProject\MediaPlayer\MediaPlayer\bin\x86\Debug\Core\MediaPlayer.exe">
       <PackagePath>MediaPlayer.exe</PackagePath>
-      <Modified>2022-12-01T22:00:42.526</Modified>
+      <Modified>2022-12-01T22:26:34.619</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\alext\.nuget\packages\microsoft.ui.xaml\2.7.0\buildTransitive\..\lib\uap10.0\Microsoft.UI.Xaml.winmd">
       <PackagePath>Microsoft.UI.Xaml.winmd</PackagePath>

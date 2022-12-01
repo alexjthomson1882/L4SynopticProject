@@ -111,6 +111,8 @@ namespace MusicPlayer.Playback {
         /// </summary>
         public event Action<AudioMedia, double, double> OnMediaPlaybackPositionChanged;
 
+        public event Action OnMediaPlaybackComplete;
+
         #endregion
 
         #region constructor
@@ -123,6 +125,7 @@ namespace MusicPlayer.Playback {
             audioPlayer.OnMediaPlaybackStart += AudioPlayer_OnMediaPlaybackStart; ;
             audioPlayer.OnMediaPlaybackStop += AudioPlayer_OnMediaPlaybackStop; ;
             audioPlayer.OnMediaPlaybackPositionChanged += AudioPlayer_OnMediaPlaybackPositionChanged; ;
+            audioPlayer.OnMediaPlaybackComplete += AudioPlayer_OnMediaPlaybackComplete;
             // initialise media picker variables:
             mediaPicker = null;
             shuffle = false;
@@ -298,6 +301,10 @@ namespace MusicPlayer.Playback {
 
         private void AudioPlayer_OnMediaPlaybackPositionChanged(AudioMedia media, double position, double duration) {
             OnMediaPlaybackPositionChanged?.Invoke(media, position, duration);
+        }
+
+        private void AudioPlayer_OnMediaPlaybackComplete() {
+            OnMediaPlaybackComplete?.Invoke();
         }
 
         #endregion

@@ -147,6 +147,11 @@ namespace MusicPlayer.Playback {
         /// </summary>
         public event Action<AudioMedia, double, double> OnMediaPlaybackPositionChanged;
 
+        /// <summary>
+        /// Invoked when playback for the <see cref="CurrentMedia"/> has completed.
+        /// </summary>
+        public event Action OnMediaPlaybackComplete;
+
         #endregion
 
         #region constructor
@@ -161,6 +166,7 @@ namespace MusicPlayer.Playback {
                 AudioCategory = MediaPlayerAudioCategory.Media
             };
             mediaPlayer.PlaybackSession.PositionChanged += PlaybackSessionPositionChanged;
+            mediaPlayer.PlaybackSession.PlaybackStateChanged += PlaybackSessionStateChanged;
         }
 
         #endregion
@@ -180,6 +186,18 @@ namespace MusicPlayer.Playback {
 
         private void PlaybackSessionPositionChanged(MediaPlaybackSession sender, object args) {
             App.QueueRunAsync(() => { OnMediaPlaybackPositionChanged?.Invoke(currentMedia, PlaybackPosition, PlaybackDuration); });
+        }
+
+        #endregion
+
+        #region PlaybackSessionStateChanged
+
+        private void PlaybackSessionStateChanged(MediaPlaybackSession sender, object args) {
+            if (mediaPlayer.Source == null) return;
+            MediaPlaybackSession session = mediaPlayer.PlaybackSession;
+            if (session.PlaybackState == MediaPlaybackState.Paused && session.Position >= session.NaturalDuration) { // complete
+                OnMediaPlaybackComplete?.Invoke();
+            }
         }
 
         #endregion

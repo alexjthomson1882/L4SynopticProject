@@ -56,6 +56,7 @@ namespace MusicPlayer {
             playbackManager.OnMediaPlaybackStart += AudioPlayer_OnMediaPlaybackStart;
             playbackManager.OnMediaPlaybackStop += AudioPlayer_OnMediaPlaybackStop;
             playbackManager.OnMediaPlaybackPositionChanged += AudioPlayer_OnMediaPlaybackPositionChanged;
+            playbackManager.OnMediaPlaybackComplete += PlaybackManager_OnMediaPlaybackComplete;
         }
 
         #endregion
@@ -149,6 +150,10 @@ namespace MusicPlayer {
             // update slider position:
             SeekSlider.DataContext = playbackManager;
             SetPlaybackPosition(position, duration);
+        }
+
+        private void PlaybackManager_OnMediaPlaybackComplete() {
+            playbackManager.Next();
         }
 
         #endregion
