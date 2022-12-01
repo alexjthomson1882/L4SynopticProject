@@ -1,4 +1,5 @@
 ﻿using MusicPlayer.Media;
+using MusicPlayer.Playback;
 
 using System;
 
@@ -16,13 +17,25 @@ namespace MusicPlayer {
 
         #region variable
 
-        private AudioPlayer audioPlayer;
-        private MediaManager mediaManager;
+        /// <summary>
+        /// <see cref="AudioPlayer"/> used for playing audio.
+        /// </summary>
+        private readonly PlaybackManager playbackManager;
+
+        /// <summary>
+        /// <see cref="MediaManager"/> used for managing media.
+        /// </summary>
+        private readonly MediaManager mediaManager;
 
         /// <summary>
         /// Tracks if the <see cref="SeekSlider"/> is being manually controlled.
         /// </summary>
-        private bool manualSliderManipulation = false;
+        private bool manualSeekSliderManipulation = false;
+
+        /// <summary>
+        /// Tracks if the <see cref="VolumeSlider"/> is being manually controlled.
+        /// </summary>
+        private bool manualVolumeSliderManipulation = false;
 
         #endregion
 
@@ -33,20 +46,14 @@ namespace MusicPlayer {
             Loaded += MainPage_Loaded;
             // get audio player and media manager:
             App application = Application.Current as App;
-            if (application != null) {
-                audioPlayer = application.AudioPlayer;
-                mediaManager = application.MediaManager;
-                mediaManager.Initialise();
-                // bind event callbacks:
-                audioPlayer.OnMediaMounted += AudioPlayer_OnMediaMounted;
-                audioPlayer.OnMediaUnmounted += AudioPlayer_OnMediaUnmounted;
-                audioPlayer.OnMediaPlaybackStart += AudioPlayer_OnMediaPlaybackStart;
-                audioPlayer.OnMediaPlaybackStop += AudioPlayer_OnMediaPlaybackStop;
-                audioPlayer.OnMediaPlaybackPositionChanged += AudioPlayer_OnMediaPlaybackPositionChanged;
-            } else {
-                audioPlayer = null;
-                mediaManager = null;
-            }
+            playbackManager = application.PlaybackManager;
+            mediaManager = application.MediaManager;
+            // bind event callbacks:
+            playbackManager.OnMediaMounted += AudioPlayer_OnMediaMounted;
+            playbackManager.OnMediaUnmounted += AudioPlayer_OnMediaUnmounted;
+            playbackManager.OnMediaPlaybackStart += AudioPlayer_OnMediaPlaybackStart;
+            playbackManager.OnMediaPlaybackStop += AudioPlayer_OnMediaPlaybackStop;
+            playbackManager.OnMediaPlaybackPositionChanged += AudioPlayer_OnMediaPlaybackPositionChanged;
         }
 
         #endregion
@@ -82,7 +89,7 @@ namespace MusicPlayer {
         /// <param name="duration">Duration of the current media in seconds.</param>
         private void SetPlaybackPosition(in double position, in double duration) {
             // update seek slider:
-            if (!manualSliderManipulation) {
+            if (!manualSeekSliderManipulation) {
                 SeekSlider.Minimum = 0.0;
                 SeekSlider.Maximum = duration;
                 SeekSlider.Value = position;
@@ -90,6 +97,27 @@ namespace MusicPlayer {
             // update seek text:
             SeekTime.Text = TimeSpan.FromSeconds(position).ToString(@"mm\:ss");
             SeekDuration.Text = TimeSpan.FromSeconds(duration).ToString(@"mm\:ss");
+        }
+
+        #endregion
+
+        #region SeekSlider
+
+        private void SeekSlider_ManipulationStarted(object sender, ManipulationStartedRoutedEventArgs e) {
+            manualSeekSliderManipulation = true;
+        }
+
+        private void SeekSlider_ManipulationCompleted(object sender, ManipulationCompletedRoutedEventArgs e) {
+            manualSeekSliderManipulation = false;
+            playbackManager.PlaybackPosition = SeekSlider.Value;
+        }
+
+        private void SeekSlider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e) {
+            if (manualSeekSliderManipulation) {
+                SetPlaybackPosition(SeekSlider.Value, playbackManager.PlaybackDuration);
+            } else {
+                playbackManager.PlaybackPosition = SeekSlider.Value;
+            }
         }
 
         #endregion
@@ -114,7 +142,7 @@ namespace MusicPlayer {
 
         private void AudioPlayer_OnMediaPlaybackPositionChanged(AudioMedia media, double position, double duration) {
             // check if slider is being manually manipulated:
-            if (manualSliderManipulation) return;
+            if (manualSeekSliderManipulation) return;
             // update slider position:
             SetPlaybackPosition(position, duration);
         }
@@ -127,7 +155,7 @@ namespace MusicPlayer {
             // update controls:
             UpdateVolumeControls();
             // navigate to home page:
-            NavigateTo<HomePage>();
+            NavigateTo<LibraryPage>();
         }
 
         #endregion
@@ -137,23 +165,7 @@ namespace MusicPlayer {
         /// <summary>
         /// Navigates to a <see cref="Page"/> of type <typeparamref name="T"/>.
         /// </summary>
-        private void NavigateTo<T>() where T : Page => ContentFrame.Navigate(typeof(T));
-
-        #endregion
-
-        #region HomeButton
-
-        private void HomeButton_Click(object sender, RoutedEventArgs e) {
-            NavigateTo<HomePage>();
-        }
-
-        #endregion
-
-        #region SearchButton
-
-        private void SearchButton_Click(object sender, RoutedEventArgs e) {
-            NavigateTo<SearchPage>();
-        }
+        private void NavigateTo<T>(in object parameter = null) where T : Page => ContentFrame.Navigate(typeof(T), parameter);
 
         #endregion
 
@@ -168,7 +180,7 @@ namespace MusicPlayer {
         #region Playlists
 
         private void PlaylistsButton_Click(object sender, RoutedEventArgs e) {
-            NavigateTo<ViewPlaylistPage>();
+            NavigateTo<PlaylistListPage>();
         }
 
         #endregion
@@ -176,7 +188,8 @@ namespace MusicPlayer {
         #region CreatePlaylist
 
         private void CreatePlaylistButton_Click(object sender, RoutedEventArgs e) {
-            NavigateTo<ViewPlaylistPage>();
+            Playlist playlist = mediaManager.CreatePlaylist("New Playlist");
+            NavigateTo<PlaylistPage>(playlist);
         }
 
         #endregion
@@ -192,8 +205,8 @@ namespace MusicPlayer {
         #region MuteButton
 
         private void MuteButton_Click(object sender, RoutedEventArgs e) {
-            if (audioPlayer == null) return;
-            audioPlayer.IsMuted = !audioPlayer.IsMuted;
+            if (playbackManager == null) return;
+            playbackManager.IsMuted = !playbackManager.IsMuted;
             UpdateVolumeControls();
         }
 
@@ -201,9 +214,20 @@ namespace MusicPlayer {
 
         #region VolumeSlider
 
+        private void VolumeSlider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e) {
+            if (!manualVolumeSliderManipulation) {
+                playbackManager.Volume = VolumeSlider.Value * 0.01;
+                UpdateVolumeControls();
+            }
+        }
+
+        private void VolumeSlider_ManipulationStarted(object sender, ManipulationStartedRoutedEventArgs e) {
+            manualVolumeSliderManipulation = true;
+        }
+
         private void VolumeSlider_ManipulationCompleted(object sender, ManipulationCompletedRoutedEventArgs e) {
-            if (audioPlayer == null) return;
-            audioPlayer.Volume = (float)VolumeSlider.Value * 0.01f;
+            manualVolumeSliderManipulation = false;
+            playbackManager.Volume = VolumeSlider.Value * 0.01;
             UpdateVolumeControls();
         }
 
@@ -212,46 +236,9 @@ namespace MusicPlayer {
         #region UpdateVolumeControls
 
         private void UpdateVolumeControls() {
-            if (audioPlayer == null) return;
-            VolumeSlider.Value = audioPlayer.Volume * 100.0f;
-            MuteButtonText.Text = audioPlayer.IsMuted ? "\xECB8" : "\xECB6";
-        }
-
-        #endregion
-
-        #region SeekSlider
-
-        private void SeekSlider_Tapped(object sender, TappedRoutedEventArgs e) {
-            SeekSlider_EmulatePress();
-        }
-
-        private void SeekSlider_PointerPressed(object sender, PointerRoutedEventArgs e) {
-            SeekSlider_EmulatePress();
-        }
-
-        private void SeekSlider_EmulatePress() {
-            manualSliderManipulation = true;
-            SeekSlider.ValueChanged -= SeekSlider_ValueChanged;
-            SeekSlider.ValueChanged += SeekSlider_ValueChanged;
-            App.QueueRunAsync(() => { audioPlayer.PlaybackPosition = SeekSlider.Value; manualSliderManipulation = false; });
-        }
-
-        private void SeekSlider_ManipulationStarted(object sender, ManipulationStartedRoutedEventArgs e) {
-            manualSliderManipulation = true;
-            SeekSlider.ValueChanged -= SeekSlider_ValueChanged;
-            SeekSlider.ValueChanged += SeekSlider_ValueChanged;
-        }
-
-        private void SeekSlider_ManipulationCompleted(object sender, ManipulationCompletedRoutedEventArgs e) {
-            App.QueueRunAsync(() => { audioPlayer.PlaybackPosition = SeekSlider.Value; manualSliderManipulation = false; });
-        }
-
-        private void SeekSlider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e) {
-            if (manualSliderManipulation) {
-                SetPlaybackPosition(SeekSlider.Value, audioPlayer.CurrentMediaDuration);
-            } else {
-                SeekSlider.ValueChanged -= SeekSlider_ValueChanged;
-            }
+            if (playbackManager == null) return;
+            VolumeSlider.Value = playbackManager.Volume * 100.0;
+            MuteButtonText.Text = playbackManager.IsMuted ? "\xECB8" : "\xECB6";
         }
 
         #endregion
@@ -259,13 +246,13 @@ namespace MusicPlayer {
         #region MediaPlayButton
 
         private void MediaPlayButton_Click(object sender, RoutedEventArgs e) {
-            bool hasMedia = audioPlayer.HasMedia;
-            bool nextPlayState = !audioPlayer.IsPlaying;
+            bool hasMedia = playbackManager.HasMedia;
+            bool nextPlayState = !playbackManager.IsPlaying;
             if (!hasMedia && nextPlayState) nextPlayState = false;
             if (nextPlayState) {
-                audioPlayer.Play();
+                playbackManager.Resume();
             } else {
-                audioPlayer.Pause();
+                playbackManager.Pause();
             }
         }
 
@@ -274,15 +261,7 @@ namespace MusicPlayer {
         #region MediaPreviousButton
 
         private void MediaPreviousButton_Click(object sender, RoutedEventArgs e) {
-
-        }
-
-        #endregion
-
-        #region MediaShuffleButton
-
-        private void MediaShuffleButton_Click(object sender, RoutedEventArgs e) {
-
+            playbackManager.Last();
         }
 
         #endregion
@@ -290,6 +269,14 @@ namespace MusicPlayer {
         #region MediaNextButton
 
         private void MediaNextButton_Click(object sender, RoutedEventArgs e) {
+            playbackManager.Next();
+        }
+
+        #endregion
+
+        #region MediaShuffleButton
+
+        private void MediaShuffleButton_Click(object sender, RoutedEventArgs e) {
 
         }
 

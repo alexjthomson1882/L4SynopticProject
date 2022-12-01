@@ -51,9 +51,6 @@
 						<RowDefinition Height="48"/>
 						<RowDefinition Height="32"/>
 						<RowDefinition Height="48"/>
-						<RowDefinition Height="48"/>
-						<RowDefinition Height="32"/>
-						<RowDefinition Height="48"/>
 						<RowDefinition/>
 						<RowDefinition Height="8"/>
 					</Grid.RowDefinitions>
@@ -63,31 +60,11 @@
 							<ColumnDefinition Width="8"/>
 							<ColumnDefinition/>
 						</Grid.ColumnDefinitions>
-						<TextBlock Grid.Column="0" VerticalAlignment="Center" TextAlignment="Right" FontSize="24" FontFamily="{StaticResource IcoFont}" Text="&#xEF47;"/>
-						<TextBlock Grid.Column="2" VerticalAlignment="Center" TextAlignment="Left" FontSize="16" FontWeight="Bold">Home</TextBlock>
-						<Button Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="HomeButton_Click"/>
-					</Grid>
-					<Grid Grid.Row="2">
-						<Grid.ColumnDefinitions>
-							<ColumnDefinition Width="64"/>
-							<ColumnDefinition Width="8"/>
-							<ColumnDefinition/>
-						</Grid.ColumnDefinitions>
-						<TextBlock Grid.Column="0" VerticalAlignment="Center" TextAlignment="Right" FontSize="24" FontFamily="{StaticResource IcoFont}" Text="&#xEC82;"/>
-						<TextBlock Grid.Column="2" VerticalAlignment="Center" TextAlignment="Left" FontSize="16" FontWeight="Bold">Search</TextBlock>
-						<Button Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="SearchButton_Click"/>
-					</Grid>
-					<Grid Grid.Row="3">
-						<Grid.ColumnDefinitions>
-							<ColumnDefinition Width="64"/>
-							<ColumnDefinition Width="8"/>
-							<ColumnDefinition/>
-						</Grid.ColumnDefinitions>
 						<TextBlock Grid.Column="0" VerticalAlignment="Center" TextAlignment="Right" FontSize="24" FontFamily="{StaticResource IcoFont}" Text="&#xEF65;"/>
 						<TextBlock Grid.Column="2" VerticalAlignment="Center" TextAlignment="Left" FontSize="16" FontWeight="Bold">Library</TextBlock>
 						<Button Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="LibraryButton_Click"/>
 					</Grid>
-					<Grid Grid.Row="5">
+					<Grid Grid.Row="2">
 						<Grid.ColumnDefinitions>
 							<ColumnDefinition Width="64"/>
 							<ColumnDefinition Width="8"/>
@@ -97,7 +74,7 @@
 						<TextBlock Grid.Column="2" VerticalAlignment="Center" TextAlignment="Left" FontSize="16" FontWeight="Bold">Playlists</TextBlock>
 						<Button Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="PlaylistsButton_Click"/>
 					</Grid>
-					<Grid Grid.Row="6">
+					<Grid Grid.Row="3">
 						<Grid.ColumnDefinitions>
 							<ColumnDefinition Width="64"/>
 							<ColumnDefinition Width="8"/>
@@ -107,7 +84,7 @@
 						<TextBlock Grid.Column="2" VerticalAlignment="Center" TextAlignment="Left" FontSize="16" FontWeight="Bold">Create Playlist</TextBlock>
 						<Button Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="CreatePlaylistButton_Click"/>
 					</Grid>
-					<Grid Grid.Row="8">
+					<Grid Grid.Row="5">
 						<Grid.ColumnDefinitions>
 							<ColumnDefinition Width="64"/>
 							<ColumnDefinition Width="8"/>
@@ -206,9 +183,23 @@
 							<ColumnDefinition/>
 							<ColumnDefinition Width="64"/>
 						</Grid.ColumnDefinitions>
-						<TextBlock Name="SeekTime" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" TextAlignment="Center" FontSize="14" FontWeight="Medium" Text="0:00"/>
-						<Slider Name="SeekSlider" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" IsTapEnabled="True" IsDoubleTapEnabled="False" PointerPressed="SeekSlider_PointerPressed" Tapped="SeekSlider_Tapped" ManipulationMode="All" ManipulationStarted="SeekSlider_ManipulationStarted" ManipulationCompleted="SeekSlider_ManipulationCompleted"/>
-						<TextBlock Name="SeekDuration" Grid.Row="0" Grid.Column="2" VerticalAlignment="Center" TextAlignment="Center" FontSize="14" FontWeight="Medium" Text="0:00"/>
+						<TextBlock
+							Name="SeekTime" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" TextAlignment="Center"
+							FontSize="14" FontWeight="Medium"
+							Text="0:00"
+						/>
+						<Slider
+							Name="SeekSlider" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center"
+							ValueChanged="SeekSlider_ValueChanged"
+							ManipulationMode="All"
+							ManipulationStarted="SeekSlider_ManipulationStarted"
+							ManipulationCompleted="SeekSlider_ManipulationCompleted"
+						/>
+						<TextBlock
+							Name="SeekDuration" Grid.Row="0" Grid.Column="2" VerticalAlignment="Center" TextAlignment="Center"
+							FontSize="14" FontWeight="Medium"
+							Text="0:00"
+						/>
 					</Grid>
 				</Grid>
 				<Grid Grid.Column="4">
@@ -220,10 +211,26 @@
 					<Grid.RowDefinitions>
 						<RowDefinition/>
 					</Grid.RowDefinitions>
-					<Button Name="MuteButton" Grid.Column="0" Width="32" Height="32" HorizontalAlignment="Center" Click="MuteButton_Click">
-						<TextBlock Name="MuteButtonText" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="{StaticResource IcoFont}" FontSize="24" TextAlignment="Center" Text="&#xECB8;" Margin="-16,-16,-16,-16"/>
+					<Button
+						Name="MuteButton" Grid.Column="0" HorizontalAlignment="Center"
+						Width="32" Height="32"
+						Click="MuteButton_Click"
+					>
+						<TextBlock
+							Name="MuteButtonText" VerticalAlignment="Center" HorizontalAlignment="Center"
+							FontFamily="{StaticResource IcoFont}" FontSize="24" TextAlignment="Center"
+							Text="&#xECB8;"
+							Margin="-16,-16,-16,-16"
+						/>
 					</Button>
-					<Slider Name="VolumeSlider" Grid.Column="1" VerticalAlignment="Center" Value="0" Minimum="0" Maximum="100" ManipulationMode="All" ManipulationCompleted="VolumeSlider_ManipulationCompleted"/>
+					<Slider
+						Name="VolumeSlider" Grid.Column="1" VerticalAlignment="Center"
+						Value="0" Minimum="0" Maximum="100"
+						ValueChanged="VolumeSlider_ValueChanged"
+						ManipulationMode="All"
+						ManipulationStarted="VolumeSlider_ManipulationStarted"
+						ManipulationCompleted="VolumeSlider_ManipulationCompleted"
+					/>
 				</Grid>
 			</Grid>
 		</Grid>

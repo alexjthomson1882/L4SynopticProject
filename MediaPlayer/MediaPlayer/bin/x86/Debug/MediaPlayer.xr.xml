@@ -6,6 +6,8 @@
     <RootPropertyPathName Name="Artist" />
     <RootPropertyPathName Name="Album" />
     <RootPropertyPathName Name="Title" />
+    <RootPropertyPathName Name="TotalItems" />
+    <RootPropertyPathName Name="Name" />
     <RootPropertyPathName Name="Path" />
   </Roots.PropertyPathNames>
   <Roots.RootTypes>
@@ -15,32 +17,16 @@
     <RootType FullName="Windows.UI.Xaml.Media.FontFamily" />
     <RootType FullName="Windows.UI.Xaml.Controls.Page">
       <RootProperty Name="Background" />
-      <RootProperty Name="Content" />
       <RootProperty Name="Resources" />
-    </RootType>
-    <RootType FullName="Windows.UI.Xaml.Controls.Grid">
-      <RootProperty Name="Children" />
-      <RootProperty Name="RowDefinitions" />
-      <RootProperty Name="ColumnDefinitions" />
-      <RootProperty Name="Background" />
-      <RootProperty Name="VerticalAlignment" />
-      <RootProperty Name="RequestedTheme" />
-      <RootProperty Name="Name" />
-      <RootEvent Name="Loaded" />
-      <RootMethod Name="GetRow" />
-      <RootMethod Name="SetRow" />
-      <RootMethod Name="GetColumn" />
-      <RootMethod Name="SetColumn" />
-      <RootMethod Name="GetColumnSpan" />
-      <RootMethod Name="SetColumnSpan" />
+      <RootProperty Name="Content" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.TextBlock">
-      <RootProperty Name="Inlines" />
       <RootProperty Name="Foreground" />
       <RootProperty Name="TextAlignment" />
       <RootProperty Name="TextWrapping" />
       <RootProperty Name="FontSize" />
       <RootProperty Name="FontWeight" />
+      <RootProperty Name="Inlines" />
       <RootProperty Name="Name" />
       <RootProperty Name="VerticalAlignment" />
       <RootProperty Name="HorizontalAlignment" />
@@ -48,14 +34,17 @@
       <RootProperty Name="Text" />
       <RootProperty Name="Margin" />
     </RootType>
-    <RootType FullName="MusicPlayer.HomePage" />
     <RootType FullName="Windows.UI.Xaml.Controls.Button">
       <RootProperty Name="Name" />
+      <RootProperty Name="HorizontalAlignment" />
       <RootProperty Name="Width" />
       <RootProperty Name="Height" />
-      <RootProperty Name="HorizontalAlignment" />
       <RootProperty Name="Content" />
       <RootProperty Name="VerticalAlignment" />
+      <RootProperty Name="Background" />
+      <RootProperty Name="Foreground" />
+      <RootProperty Name="FontSize" />
+      <RootProperty Name="FontWeight" />
       <RootEvent Name="Click" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.Control">
@@ -65,6 +54,23 @@
     <RootType FullName="Windows.UI.Xaml.Setter">
       <RootProperty Name="Property" />
       <RootProperty Name="Value" />
+    </RootType>
+    <RootType FullName="Windows.UI.Xaml.Controls.Grid">
+      <RootProperty Name="RowDefinitions" />
+      <RootProperty Name="ColumnDefinitions" />
+      <RootProperty Name="Children" />
+      <RootProperty Name="Background" />
+      <RootProperty Name="VerticalAlignment" />
+      <RootProperty Name="RequestedTheme" />
+      <RootEvent Name="Loaded" />
+      <RootMethod Name="GetRow" />
+      <RootMethod Name="SetRow" />
+      <RootMethod Name="GetColumn" />
+      <RootMethod Name="SetColumn" />
+      <RootMethod Name="GetColumnSpan" />
+      <RootMethod Name="SetColumnSpan" />
+      <RootMethod Name="GetRowSpan" />
+      <RootMethod Name="SetRowSpan" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.RowDefinition">
       <RootProperty Name="Height" />
@@ -88,6 +94,7 @@
       <RootProperty Name="SelectionMode" />
       <RootProperty Name="TabNavigation" />
       <RootProperty Name="Columns" />
+      <RootProperty Name="RowStyle" />
       <RootEvent Name="Sorting" />
       <RootEvent Name="SelectionChanged" />
     </RootType>
@@ -114,12 +121,9 @@
       <RootProperty Name="Minimum" />
       <RootProperty Name="Maximum" />
       <RootProperty Name="ManipulationMode" />
-      <RootProperty Name="IsTapEnabled" />
-      <RootProperty Name="IsDoubleTapEnabled" />
-      <RootEvent Name="ManipulationCompleted" />
-      <RootEvent Name="PointerPressed" />
-      <RootEvent Name="Tapped" />
+      <RootEvent Name="ValueChanged" />
       <RootEvent Name="ManipulationStarted" />
+      <RootEvent Name="ManipulationCompleted" />
     </RootType>
     <RootType FullName="Microsoft.Xaml.DirectUI.ProxyTypes.StaticResourceExtension" />
     <RootType FullName="Windows.UI.Xaml.Controls.Frame">
@@ -127,12 +131,33 @@
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.Image" />
     <RootType FullName="MusicPlayer.MainPage" />
+    <RootType FullName="MusicPlayer.PlaylistListPage" />
     <RootType FullName="MusicPlayer.ScanLocationsPage" />
-    <RootType FullName="MusicPlayer.SearchPage" />
-    <RootType FullName="Windows.UI.Xaml.Controls.StackPanel" />
-    <RootType FullName="Windows.UI.Xaml.Controls.InkCanvas">
-      <RootProperty Name="Name" />
+    <RootType FullName="Microsoft.Toolkit.Uwp.UI.Controls.GridSplitter">
+      <RootProperty Name="ResizeBehavior" />
+      <RootProperty Name="ResizeDirection" />
+      <RootProperty Name="Element" />
     </RootType>
-    <RootType FullName="MusicPlayer.ViewPlaylistPage" />
+    <RootType FullName="Microsoft.Toolkit.Uwp.UI.Controls.DataGridRow" />
+    <RootType FullName="Windows.UI.Xaml.UIElement">
+      <RootProperty Name="ContextFlyout" />
+    </RootType>
+    <RootType FullName="Windows.UI.Xaml.Controls.MenuFlyout">
+      <RootProperty Name="Items" />
+    </RootType>
+    <RootType FullName="Windows.UI.Xaml.Controls.MenuFlyoutItem">
+      <RootProperty Name="Text" />
+      <RootEvent Name="Click" />
+    </RootType>
+    <RootType FullName="Windows.UI.Xaml.Controls.TextBox">
+      <RootProperty Name="Name" />
+      <RootProperty Name="TextAlignment" />
+      <RootProperty Name="TextWrapping" />
+      <RootProperty Name="FontSize" />
+      <RootProperty Name="FontWeight" />
+      <RootProperty Name="Text" />
+      <RootEvent Name="TextChanged" />
+    </RootType>
+    <RootType FullName="MusicPlayer.PlaylistPage" />
   </Roots.RootTypes>
 </Roots>

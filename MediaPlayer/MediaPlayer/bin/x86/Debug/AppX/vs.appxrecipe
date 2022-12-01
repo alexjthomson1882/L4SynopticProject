@@ -19,7 +19,7 @@
     <DeployOptionalPackages>false</DeployOptionalPackages>
     <WindowsSdkPath>C:\Program Files %28x86%29\Windows Kits\10\</WindowsSdkPath>
     <LayoutDir>D:\Development\Work\Apprenticeship\L4\SynopticProject\MediaPlayer\MediaPlayer\bin\x86\Debug\AppX</LayoutDir>
-    <RegisteredManifestChecksum>7CFE43C5DDC65878E259DD58769AB19D231DEAF7A516005BBB05E446EF1D7452</RegisteredManifestChecksum>
+    <RegisteredManifestChecksum>2D0F558C4C37D1B56959F5531736D5CA407CC202AE92DA274072250DCEA1B2B0</RegisteredManifestChecksum>
     <RegisteredPackageMoniker>1d290826-e461-42d4-9a47-1926e8c0ce99_1.0.0.0_x86__ytew0bbxkf1e0</RegisteredPackageMoniker>
     <RegisteredUserModeAppID>1d290826-e461-42d4-9a47-1926e8c0ce99_ytew0bbxkf1e0!App</RegisteredUserModeAppID>
     <RegisteredPackageID>1d290826-e461-42d4-9a47-1926e8c0ce99</RegisteredPackageID>
@@ -30,21 +30,69 @@
     <AppXManifest Include="D:\Development\Work\Apprenticeship\L4\SynopticProject\MediaPlayer\MediaPlayer\bin\x86\Debug\Core\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2022-11-29T23:12:24.810</Modified>
+      <Modified>2022-12-01T16:16:04.774</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
     <AppxPackagedFile Include="D:\Development\Work\Apprenticeship\L4\SynopticProject\MediaPlayer\MediaPlayer\bin\x86\Debug\MediaPlayer.exe">
       <PackagePath>entrypoint\MediaPlayer.exe</PackagePath>
-      <Modified>2022-11-29T23:12:23.461</Modified>
+      <Modified>2022-12-01T16:16:03.892</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\alext\.nuget\packages\colorcode.core\2.0.6\lib\netstandard1.4\ColorCode.Core.dll">
+      <PackagePath>ColorCode.Core.dll</PackagePath>
+      <Modified>2018-10-05T23:30:08.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\alext\.nuget\packages\colorcode.uwp\2.0.6\lib\uap10.0\ColorCode.UWP.dll">
+      <PackagePath>ColorCode.UWP.dll</PackagePath>
+      <Modified>2018-10-05T23:30:16.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\alext\.nuget\packages\microsoft.bcl.asyncinterfaces\5.0.0\lib\netstandard2.0\Microsoft.Bcl.AsyncInterfaces.dll">
+      <PackagePath>Microsoft.Bcl.AsyncInterfaces.dll</PackagePath>
+      <Modified>2020-10-19T18:40:26.000</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\alext\.nuget\packages\microsoft.data.sqlite.core\7.0.0\lib\netstandard2.0\Microsoft.Data.Sqlite.dll">
       <PackagePath>Microsoft.Data.Sqlite.dll</PackagePath>
       <Modified>2022-10-19T02:08:44.000</Modified>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\alext\.nuget\packages\microsoft.toolkit\7.1.2\lib\netstandard2.0\Microsoft.Toolkit.dll">
+      <PackagePath>Microsoft.Toolkit.dll</PackagePath>
+      <Modified>2021-11-18T22:28:50.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\alext\.nuget\packages\microsoft.toolkit.uwp\7.1.3\lib\uap10.0.17763\Microsoft.Toolkit.Uwp.dll">
+      <PackagePath>Microsoft.Toolkit.Uwp.dll</PackagePath>
+      <Modified>2022-11-01T17:32:44.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\alext\.nuget\packages\microsoft.toolkit.uwp.ui\7.1.3\lib\uap10.0.17763\Microsoft.Toolkit.Uwp.UI.dll">
+      <PackagePath>Microsoft.Toolkit.Uwp.UI.dll</PackagePath>
+      <Modified>2022-11-01T17:32:54.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\alext\.nuget\packages\microsoft.toolkit.uwp.ui.controls.core\7.1.3\lib\uap10.0.17763\Microsoft.Toolkit.Uwp.UI.Controls.Core.dll">
+      <PackagePath>Microsoft.Toolkit.Uwp.UI.Controls.Core.dll</PackagePath>
+      <Modified>2022-11-01T17:33:02.000</Modified>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\alext\.nuget\packages\microsoft.toolkit.uwp.ui.controls.datagrid\7.1.3\lib\uap10.0.17763\Microsoft.Toolkit.Uwp.UI.Controls.DataGrid.dll">
       <PackagePath>Microsoft.Toolkit.Uwp.UI.Controls.DataGrid.dll</PackagePath>
       <Modified>2022-11-01T17:33:04.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\alext\.nuget\packages\microsoft.toolkit.uwp.ui.controls.input\7.1.3\lib\uap10.0.17763\Microsoft.Toolkit.Uwp.UI.Controls.Input.dll">
+      <PackagePath>Microsoft.Toolkit.Uwp.UI.Controls.Input.dll</PackagePath>
+      <Modified>2022-11-01T17:33:06.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\alext\.nuget\packages\microsoft.toolkit.uwp.ui.controls.layout\7.1.3\lib\uap10.0.17763\Microsoft.Toolkit.Uwp.UI.Controls.Layout.dll">
+      <PackagePath>Microsoft.Toolkit.Uwp.UI.Controls.Layout.dll</PackagePath>
+      <Modified>2022-11-01T17:33:08.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\alext\.nuget\packages\microsoft.toolkit.uwp.ui.controls.markdown\7.1.3\lib\uap10.0.17763\Microsoft.Toolkit.Uwp.UI.Controls.Markdown.dll">
+      <PackagePath>Microsoft.Toolkit.Uwp.UI.Controls.Markdown.dll</PackagePath>
+      <Modified>2022-11-01T17:33:10.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\alext\.nuget\packages\microsoft.toolkit.uwp.ui.controls.media\7.1.3\lib\uap10.0.17763\Microsoft.Toolkit.Uwp.UI.Controls.Media.dll">
+      <PackagePath>Microsoft.Toolkit.Uwp.UI.Controls.Media.dll</PackagePath>
+      <Modified>2022-11-01T17:33:14.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\alext\.nuget\packages\microsoft.toolkit.uwp.ui.controls.primitives\7.1.3\lib\uap10.0.17763\Microsoft.Toolkit.Uwp.UI.Controls.Primitives.dll">
+      <PackagePath>Microsoft.Toolkit.Uwp.UI.Controls.Primitives.dll</PackagePath>
+      <Modified>2022-11-01T17:33:16.000</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\alext\.nuget\packages\runtime.win10-x86.microsoft.netcore.universalwindowsplatform\6.2.14\runtimes\win10-x86\lib\uap10.0.15138\System.Runtime.dll">
       <PackagePath>System.Runtime.dll</PackagePath>
@@ -66,17 +114,53 @@
       <PackagePath>SQLitePCLRaw.provider.e_sqlite3.dll</PackagePath>
       <Modified>2022-09-18T19:27:06.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\alext\.nuget\packages\system.runtime.compilerservices.unsafe\4.5.2\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll">
+    <AppxPackagedFile Include="C:\Users\alext\.nuget\packages\system.runtime.compilerservices.unsafe\5.0.0\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll">
       <PackagePath>System.Runtime.CompilerServices.Unsafe.dll</PackagePath>
-      <Modified>2018-09-18T19:38:10.000</Modified>
+      <Modified>2020-10-19T18:46:44.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\alext\.nuget\packages\system.text.encodings.web\5.0.1\lib\netstandard2.0\System.Text.Encodings.Web.dll">
+      <PackagePath>System.Text.Encodings.Web.dll</PackagePath>
+      <Modified>2021-02-16T21:53:32.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\alext\.nuget\packages\system.text.json\5.0.2\lib\netstandard2.0\System.Text.Json.dll">
+      <PackagePath>System.Text.Json.dll</PackagePath>
+      <Modified>2021-03-16T22:34:16.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\alext\.nuget\packages\win2d.uwp\1.25.0\runtimes\win10-x86\native\Microsoft.Graphics.Canvas.dll">
+      <PackagePath>Microsoft.Graphics.Canvas.dll</PackagePath>
+      <Modified>2020-04-02T19:44:36.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\alext\.nuget\packages\win2d.uwp\1.25.0\lib\uap10.0\Microsoft.Graphics.Canvas.winmd">
+      <PackagePath>Microsoft.Graphics.Canvas.winmd</PackagePath>
+      <Modified>2020-04-02T19:44:36.000</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Program Files %28x86%29\Windows Kits\10\bin\10.0.22000.0\XamlCompiler\Microsoft.UI.Xaml.Markup.winmd">
       <PackagePath>Microsoft.UI.Xaml.Markup.winmd</PackagePath>
       <Modified>2021-09-11T18:48:58.000</Modified>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\alext\.nuget\packages\microsoft.toolkit.uwp.ui.controls.core\7.1.3\lib\uap10.0.17763\Microsoft.Toolkit.Uwp.UI.Controls.Core\Microsoft.Toolkit.Uwp.UI.Controls.Core.xr.xml">
+      <PackagePath>Microsoft.Toolkit.Uwp.UI.Controls.Core\Microsoft.Toolkit.Uwp.UI.Controls.Core.xr.xml</PackagePath>
+      <Modified>2022-11-01T17:20:58.000</Modified>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\alext\.nuget\packages\microsoft.toolkit.uwp.ui.controls.datagrid\7.1.3\lib\uap10.0.17763\Microsoft.Toolkit.Uwp.UI.Controls.DataGrid\Microsoft.Toolkit.Uwp.UI.Controls.DataGrid.xr.xml">
       <PackagePath>Microsoft.Toolkit.Uwp.UI.Controls.DataGrid\Microsoft.Toolkit.Uwp.UI.Controls.DataGrid.xr.xml</PackagePath>
       <Modified>2022-11-01T17:17:18.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\alext\.nuget\packages\microsoft.toolkit.uwp.ui.controls.input\7.1.3\lib\uap10.0.17763\Microsoft.Toolkit.Uwp.UI.Controls.Input\Microsoft.Toolkit.Uwp.UI.Controls.Input.xr.xml">
+      <PackagePath>Microsoft.Toolkit.Uwp.UI.Controls.Input\Microsoft.Toolkit.Uwp.UI.Controls.Input.xr.xml</PackagePath>
+      <Modified>2022-11-01T17:20:46.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\alext\.nuget\packages\microsoft.toolkit.uwp.ui.controls.layout\7.1.3\lib\uap10.0.17763\Microsoft.Toolkit.Uwp.UI.Controls.Layout\Microsoft.Toolkit.Uwp.UI.Controls.Layout.xr.xml">
+      <PackagePath>Microsoft.Toolkit.Uwp.UI.Controls.Layout\Microsoft.Toolkit.Uwp.UI.Controls.Layout.xr.xml</PackagePath>
+      <Modified>2022-11-01T17:20:34.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\alext\.nuget\packages\microsoft.toolkit.uwp.ui.controls.markdown\7.1.3\lib\uap10.0.17763\Microsoft.Toolkit.Uwp.UI.Controls.Markdown\Microsoft.Toolkit.Uwp.UI.Controls.Markdown.xr.xml">
+      <PackagePath>Microsoft.Toolkit.Uwp.UI.Controls.Markdown\Microsoft.Toolkit.Uwp.UI.Controls.Markdown.xr.xml</PackagePath>
+      <Modified>2022-11-01T17:21:06.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\alext\.nuget\packages\microsoft.toolkit.uwp.ui.controls.media\7.1.3\lib\uap10.0.17763\Microsoft.Toolkit.Uwp.UI.Controls.Media\Microsoft.Toolkit.Uwp.UI.Controls.Media.xr.xml">
+      <PackagePath>Microsoft.Toolkit.Uwp.UI.Controls.Media\Microsoft.Toolkit.Uwp.UI.Controls.Media.xr.xml</PackagePath>
+      <Modified>2022-11-01T17:20:24.000</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Development\Work\Apprenticeship\L4\SynopticProject\MediaPlayer\MediaPlayer\Properties\Default.rd.xml">
       <PackagePath>Properties\Default.rd.xml</PackagePath>
@@ -122,35 +206,31 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Development\Work\Apprenticeship\L4\SynopticProject\MediaPlayer\MediaPlayer\bin\x86\Debug\MediaPlayer.xr.xml">
       <PackagePath>MediaPlayer.xr.xml</PackagePath>
-      <Modified>2022-11-29T22:22:53.686</Modified>
+      <Modified>2022-12-01T16:10:27.725</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Development\Work\Apprenticeship\L4\SynopticProject\MediaPlayer\MediaPlayer\bin\x86\Debug\App.xbf">
       <PackagePath>App.xbf</PackagePath>
-      <Modified>2022-11-29T23:12:23.372</Modified>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="D:\Development\Work\Apprenticeship\L4\SynopticProject\MediaPlayer\MediaPlayer\bin\x86\Debug\HomePage.xbf">
-      <PackagePath>HomePage.xbf</PackagePath>
-      <Modified>2022-11-29T23:12:23.372</Modified>
+      <Modified>2022-12-01T16:16:03.816</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Development\Work\Apprenticeship\L4\SynopticProject\MediaPlayer\MediaPlayer\bin\x86\Debug\LibraryPage.xbf">
       <PackagePath>LibraryPage.xbf</PackagePath>
-      <Modified>2022-11-29T23:12:23.373</Modified>
+      <Modified>2022-12-01T16:16:03.816</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Development\Work\Apprenticeship\L4\SynopticProject\MediaPlayer\MediaPlayer\bin\x86\Debug\MainPage.xbf">
       <PackagePath>MainPage.xbf</PackagePath>
-      <Modified>2022-11-29T23:12:23.369</Modified>
+      <Modified>2022-12-01T16:16:03.810</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="D:\Development\Work\Apprenticeship\L4\SynopticProject\MediaPlayer\MediaPlayer\bin\x86\Debug\PlaylistListPage.xbf">
+      <PackagePath>PlaylistListPage.xbf</PackagePath>
+      <Modified>2022-12-01T16:16:03.816</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Development\Work\Apprenticeship\L4\SynopticProject\MediaPlayer\MediaPlayer\bin\x86\Debug\ScanLocationsPage.xbf">
       <PackagePath>ScanLocationsPage.xbf</PackagePath>
-      <Modified>2022-11-29T23:12:23.373</Modified>
+      <Modified>2022-12-01T16:16:03.816</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="D:\Development\Work\Apprenticeship\L4\SynopticProject\MediaPlayer\MediaPlayer\bin\x86\Debug\SearchPage.xbf">
-      <PackagePath>SearchPage.xbf</PackagePath>
-      <Modified>2022-11-29T23:12:23.373</Modified>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="D:\Development\Work\Apprenticeship\L4\SynopticProject\MediaPlayer\MediaPlayer\bin\x86\Debug\ViewPlaylistPage.xbf">
-      <PackagePath>ViewPlaylistPage.xbf</PackagePath>
-      <Modified>2022-11-29T23:12:23.373</Modified>
+    <AppxPackagedFile Include="D:\Development\Work\Apprenticeship\L4\SynopticProject\MediaPlayer\MediaPlayer\bin\x86\Debug\PlaylistPage.xbf">
+      <PackagePath>PlaylistPage.xbf</PackagePath>
+      <Modified>2022-12-01T16:16:03.816</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Program Files %28x86%29\Microsoft SDKs\Windows Kits\10\ExtensionSDKs\Microsoft.UniversalCRT.Debug\10.0.22000.0\\redist\Debug\x86\ucrtbased.dll">
       <PackagePath>ucrtbased.dll</PackagePath>
@@ -162,11 +242,11 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Development\Work\Apprenticeship\L4\SynopticProject\MediaPlayer\MediaPlayer\bin\x86\Debug\resources.pri">
       <PackagePath>resources.pri</PackagePath>
-      <Modified>2022-11-29T16:26:52.261</Modified>
+      <Modified>2022-12-01T15:38:55.191</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Development\Work\Apprenticeship\L4\SynopticProject\MediaPlayer\MediaPlayer\bin\x86\Debug\Core\MediaPlayer.exe">
       <PackagePath>MediaPlayer.exe</PackagePath>
-      <Modified>2022-11-29T23:12:24.805</Modified>
+      <Modified>2022-12-01T16:16:04.772</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\alext\.nuget\packages\microsoft.ui.xaml\2.7.0\buildTransitive\..\lib\uap10.0\Microsoft.UI.Xaml.winmd">
       <PackagePath>Microsoft.UI.Xaml.winmd</PackagePath>

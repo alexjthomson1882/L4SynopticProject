@@ -1,5 +1,6 @@
 ﻿using MusicPlayer.Data;
 using MusicPlayer.Media;
+using MusicPlayer.Playback;
 
 using System;
 using System.Collections.Concurrent;
@@ -28,15 +29,15 @@ namespace MusicPlayer {
 
         #region variable
 
-        private readonly MediaManager mediaManager;
+        private readonly PlaybackManager playbackManager;
 
-        private readonly AudioPlayer audioPlayer;
+        private readonly MediaManager mediaManager;
 
         #endregion
 
         #region property
 
-        public AudioPlayer AudioPlayer => audioPlayer;
+        public PlaybackManager PlaybackManager => playbackManager;
 
         public MediaManager MediaManager => mediaManager;
 
@@ -56,10 +57,11 @@ namespace MusicPlayer {
             Suspending += OnSuspending;
             // initialise database:
             DataAccess.InitialiseDatabase();
+            // create playback manager:
+            playbackManager = new PlaybackManager();
             // create media manager:
             mediaManager = new MediaManager();
-            // create audio player:
-            audioPlayer = new AudioPlayer();
+            mediaManager.Initialise();
         }
 
         #endregion

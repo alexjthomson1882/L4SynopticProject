@@ -27,6 +27,7 @@ namespace MusicPlayer.Media {
 
         #region property
 
+        public int Id => id;
         public string Path => path;
         public string Title {
             get => title;
@@ -41,7 +42,7 @@ namespace MusicPlayer.Media {
             private set => artist = string.IsNullOrWhiteSpace(value) ? "-" : value;
         }
         public DateTime DateAdded => dateAdded;
-        public string DateAddedFormatted => dateAdded.ToString("hh:mm:ss dd-MM-yyyy");
+        public string DateAddedFormatted => dateAdded.ToString(@"hh\:mm\:ss dd-MM-yyyy");
         public TimeSpan Duration { get; private set; } = TimeSpan.Zero;
         public string DurationFormatted {
             get {

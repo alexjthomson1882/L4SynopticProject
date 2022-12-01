@@ -1,5 +1,6 @@
 ﻿using MusicPlayer.Media;
-using System.Collections.Generic;
+using MusicPlayer.Playback;
+
 using System.Collections.ObjectModel;
 
 using Microsoft.Toolkit.Uwp.UI.Controls;
@@ -8,19 +9,17 @@ using System.Linq;
 
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-
-// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
+using System.Collections.Generic;
+using System.ComponentModel;
+using Windows.UI.Xaml.Navigation;
 
 namespace MusicPlayer {
 
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
     public sealed partial class LibraryPage : Page {
 
         #region variable
 
-        private AudioPlayer audioPlayer = null;
+        private PlaybackManager playbackManager = null;
 
         private MediaManager mediaManager = null;
 
@@ -35,20 +34,28 @@ namespace MusicPlayer {
         #region constructor
 
         public LibraryPage() {
-            InitializeComponent();
             // get audio player and media manager:
             App application = Application.Current as App;
-            if (application != null) {
-                audioPlayer = application.AudioPlayer;
-                mediaManager = application.MediaManager;
-            }
-           // get media:
-           MediaList = new ObservableCollection<AudioMedia>(mediaManager.GetMediaList());
+            playbackManager = application.PlaybackManager;
+            mediaManager = application.MediaManager;
+            // get media:
+            MediaList = new ObservableCollection<AudioMedia>(mediaManager.GetMediaList());
+            // initialise component:
+            InitializeComponent();
+            DataContext = this;
         }
 
         #endregion
 
         #region logic
+
+        #region MediaDataGrid
+
+        private void MediaDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e) {
+            if (!(sender is DataGrid dataGrid) || !(dataGrid.SelectedItem is AudioMedia selectedMedia)) return;
+            playbackManager.Play(selectedMedia);
+            playbackManager.Resume();
+        }
 
         private void MediaDataGrid_Sorting(object sender, DataGridColumnEventArgs e) {
             // get column tag:
@@ -75,6 +82,8 @@ namespace MusicPlayer {
                             orderby media.Title descending
                             select media
                         );
+                    } else {
+                        MediaDataGrid.ItemsSource = MediaList;
                     }
                     e.Column.SortDirection = sortDirection;
                     break;
@@ -92,6 +101,8 @@ namespace MusicPlayer {
                             orderby media.Album descending
                             select media
                         );
+                    } else {
+                        MediaDataGrid.ItemsSource = MediaList;
                     }
                     e.Column.SortDirection = sortDirection;
                     break;
@@ -109,6 +120,8 @@ namespace MusicPlayer {
                             orderby media.Artist descending
                             select media
                         );
+                    } else {
+                        MediaDataGrid.ItemsSource = MediaList;
                     }
                     e.Column.SortDirection = sortDirection;
                     break;
@@ -126,6 +139,8 @@ namespace MusicPlayer {
                             orderby media.Duration descending
                             select media
                         );
+                    } else {
+                        MediaDataGrid.ItemsSource = MediaList;
                     }
                     e.Column.SortDirection = sortDirection;
                     break;
@@ -143,6 +158,8 @@ namespace MusicPlayer {
                             orderby media.DateAdded descending
                             select media
                         );
+                    } else {
+                        MediaDataGrid.ItemsSource = MediaList;
                     }
                     e.Column.SortDirection = sortDirection;
                     break;
@@ -150,13 +167,7 @@ namespace MusicPlayer {
             }
         }
 
-        private void MediaDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e) {
-            DataGrid dataGrid = sender as DataGrid;
-            if (dataGrid == null) return;
-            AudioMedia selectedMedia = dataGrid.SelectedItem as AudioMedia;
-            if (selectedMedia == null) return;
-            audioPlayer.Play(selectedMedia);
-        }
+        #endregion
 
         #endregion
 

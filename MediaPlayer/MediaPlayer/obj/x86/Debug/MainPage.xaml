@@ -51,9 +51,6 @@
 						<RowDefinition Height="48"/>
 						<RowDefinition Height="32"/>
 						<RowDefinition Height="48"/>
-						<RowDefinition Height="48"/>
-						<RowDefinition Height="32"/>
-						<RowDefinition Height="48"/>
 						<RowDefinition/>
 						<RowDefinition Height="8"/>
 					</Grid.RowDefinitions>
@@ -63,31 +60,11 @@
 							<ColumnDefinition Width="8"/>
 							<ColumnDefinition/>
 						</Grid.ColumnDefinitions>
-						<TextBlock Grid.Column="0" VerticalAlignment="Center" TextAlignment="Right" FontSize="24" FontFamily="{StaticResource IcoFont}" Text="&#xEF47;"/>
-						<TextBlock Grid.Column="2" VerticalAlignment="Center" TextAlignment="Left" FontSize="16" FontWeight="Bold">Home</TextBlock>
-						<Button x:ConnectionId='27' Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"                         />
-					</Grid>
-					<Grid Grid.Row="2">
-						<Grid.ColumnDefinitions>
-							<ColumnDefinition Width="64"/>
-							<ColumnDefinition Width="8"/>
-							<ColumnDefinition/>
-						</Grid.ColumnDefinitions>
-						<TextBlock Grid.Column="0" VerticalAlignment="Center" TextAlignment="Right" FontSize="24" FontFamily="{StaticResource IcoFont}" Text="&#xEC82;"/>
-						<TextBlock Grid.Column="2" VerticalAlignment="Center" TextAlignment="Left" FontSize="16" FontWeight="Bold">Search</TextBlock>
-						<Button x:ConnectionId='26' Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"                           />
-					</Grid>
-					<Grid Grid.Row="3">
-						<Grid.ColumnDefinitions>
-							<ColumnDefinition Width="64"/>
-							<ColumnDefinition Width="8"/>
-							<ColumnDefinition/>
-						</Grid.ColumnDefinitions>
 						<TextBlock Grid.Column="0" VerticalAlignment="Center" TextAlignment="Right" FontSize="24" FontFamily="{StaticResource IcoFont}" Text="&#xEF65;"/>
 						<TextBlock Grid.Column="2" VerticalAlignment="Center" TextAlignment="Left" FontSize="16" FontWeight="Bold">Library</TextBlock>
 						<Button x:ConnectionId='25' Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"                            />
 					</Grid>
-					<Grid Grid.Row="5">
+					<Grid Grid.Row="2">
 						<Grid.ColumnDefinitions>
 							<ColumnDefinition Width="64"/>
 							<ColumnDefinition Width="8"/>
@@ -97,7 +74,7 @@
 						<TextBlock Grid.Column="2" VerticalAlignment="Center" TextAlignment="Left" FontSize="16" FontWeight="Bold">Playlists</TextBlock>
 						<Button x:ConnectionId='24' Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"                              />
 					</Grid>
-					<Grid Grid.Row="6">
+					<Grid Grid.Row="3">
 						<Grid.ColumnDefinitions>
 							<ColumnDefinition Width="64"/>
 							<ColumnDefinition Width="8"/>
@@ -107,7 +84,7 @@
 						<TextBlock Grid.Column="2" VerticalAlignment="Center" TextAlignment="Left" FontSize="16" FontWeight="Bold">Create Playlist</TextBlock>
 						<Button x:ConnectionId='23' Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"                                   />
 					</Grid>
-					<Grid Grid.Row="8">
+					<Grid Grid.Row="5">
 						<Grid.ColumnDefinitions>
 							<ColumnDefinition Width="64"/>
 							<ColumnDefinition Width="8"/>
@@ -206,9 +183,23 @@
 							<ColumnDefinition/>
 							<ColumnDefinition Width="64"/>
 						</Grid.ColumnDefinitions>
-						<TextBlock x:ConnectionId='6' Name="SeekTime" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" TextAlignment="Center" FontSize="14" FontWeight="Medium" Text="0:00"/>
-						<Slider x:ConnectionId='7' Name="SeekSlider" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" IsTapEnabled="True" IsDoubleTapEnabled="False"                                                                       ManipulationMode="All"                                                                                                              />
-						<TextBlock x:ConnectionId='8' Name="SeekDuration" Grid.Row="0" Grid.Column="2" VerticalAlignment="Center" TextAlignment="Center" FontSize="14" FontWeight="Medium" Text="0:00"/>
+						<TextBlock x:ConnectionId='6'
+							Name="SeekTime" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" TextAlignment="Center"
+							FontSize="14" FontWeight="Medium"
+							Text="0:00"
+						/>
+						<Slider x:ConnectionId='7'
+							Name="SeekSlider" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center"
+							                                      
+							ManipulationMode="All"
+							                                                    
+							                                                        
+						/>
+						<TextBlock x:ConnectionId='8'
+							Name="SeekDuration" Grid.Row="0" Grid.Column="2" VerticalAlignment="Center" TextAlignment="Center"
+							FontSize="14" FontWeight="Medium"
+							Text="0:00"
+						/>
 					</Grid>
 				</Grid>
 				<Grid Grid.Column="4">
@@ -220,10 +211,26 @@
 					<Grid.RowDefinitions>
 						<RowDefinition/>
 					</Grid.RowDefinitions>
-					<Button x:ConnectionId='3' Name="MuteButton" Grid.Column="0" Width="32" Height="32" HorizontalAlignment="Center"                         >
-						<TextBlock x:ConnectionId='5' Name="MuteButtonText" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="{StaticResource IcoFont}" FontSize="24" TextAlignment="Center" Text="&#xECB8;" Margin="-16,-16,-16,-16"/>
+					<Button x:ConnectionId='3'
+						Name="MuteButton" Grid.Column="0" HorizontalAlignment="Center"
+						Width="32" Height="32"
+						                        
+					>
+						<TextBlock x:ConnectionId='5'
+							Name="MuteButtonText" VerticalAlignment="Center" HorizontalAlignment="Center"
+							FontFamily="{StaticResource IcoFont}" FontSize="24" TextAlignment="Center"
+							Text="&#xECB8;"
+							Margin="-16,-16,-16,-16"
+						/>
 					</Button>
-					<Slider x:ConnectionId='4' Name="VolumeSlider" Grid.Column="1" VerticalAlignment="Center" Value="0" Minimum="0" Maximum="100" ManipulationMode="All"                                                           />
+					<Slider x:ConnectionId='4'
+						Name="VolumeSlider" Grid.Column="1" VerticalAlignment="Center"
+						Value="0" Minimum="0" Maximum="100"
+						                                        
+						ManipulationMode="All"
+						                                                      
+						                                                          
+					/>
 				</Grid>
 			</Grid>
 		</Grid>

@@ -9,6 +9,9 @@ using Windows.Storage;
 
 namespace MusicPlayer.Media {
 
+    /// <summary>
+    /// Manages interactions between the application and media database.
+    /// </summary>
     public sealed class MediaManager {
 
         #region constant
@@ -83,21 +86,22 @@ namespace MusicPlayer.Media {
                     // query the media locations:
                     using (SqliteCommand command = connection.CreateCommand()) {
                         command.CommandText = "SELECT * FROM MediaLocations";
-                        SqliteDataReader query = command.ExecuteReader();
-                        // process query result set:
-                        while (query.Read()) {
-                            // read media location data:
-                            int id = query.GetInt32(0);
-                            string path = query.GetString(1);
-                            DateTime dateAdded = query.GetDateTime(2);
-                            // update media location object:
-                            if (trackedMediaLocations.TryGetValue(id, out MediaLocation mediaLocation)) {
-                                trackedLocations.Remove(id);
-                            } else {
-                                mediaLocation = new MediaLocation(
-                                    id, path, dateAdded
-                                );
-                                trackedMediaLocations[id] = mediaLocation;
+                        using (SqliteDataReader query = command.ExecuteReader()) {
+                            // process query result set:
+                            while (query.Read()) {
+                                // read media location data:
+                                int id = query.GetInt32(0);
+                                string path = query.GetString(1);
+                                DateTime dateAdded = query.GetDateTime(2);
+                                // update media location object:
+                                if (trackedMediaLocations.TryGetValue(id, out MediaLocation mediaLocation)) {
+                                    trackedLocations.Remove(id);
+                                } else {
+                                    mediaLocation = new MediaLocation(
+                                        id, path, dateAdded
+                                    );
+                                    trackedMediaLocations[id] = mediaLocation;
+                                }
                             }
                         }
                     }
@@ -204,7 +208,6 @@ namespace MusicPlayer.Media {
         public void ReloadPlaylists() {
             // clear existing playlists:
             trackedPlaylists.Clear();
-
             // connect to database:
             using (SqliteConnection connection = DataAccess.GetConnection()) {
                 connection.Open();
@@ -213,34 +216,169 @@ namespace MusicPlayer.Media {
                     // query playlists
                     using (SqliteCommand command = connection.CreateCommand()) {
                         command.CommandText = "SELECT * FROM Playlists";
-                        SqliteDataReader query = command.ExecuteReader();
-                        // create playlists:
-                        while (query.Read()) {
-                            // get playlist info:
-                            int id = query.GetInt32(0);
-                            string playlistName = query.GetString(1);
-                            // create media dictionary:
-                            Dictionary<int, AudioMedia> mediaList = new Dictionary<int, AudioMedia>();
-                            // query database for media:
-                            using (SqliteCommand mediaCommand = connection.CreateCommand()) {
-                                mediaCommand.CommandText = "SELECT MediaId FROM PlaylistMediaMap WHERE PlaylistId={id}";
-                                mediaCommand.Parameters.AddWithValue("id", id);
-                                SqliteDataReader mediaQuery = mediaCommand.ExecuteReader();
-                                while (mediaQuery.Read()) {
-                                    id = mediaQuery.GetInt32(0);
-                                    if (trackedMedia.TryGetValue(id, out AudioMedia media)) {
-                                        mediaList[id] = media;
+                        using (SqliteDataReader query = command.ExecuteReader()) {
+                            // create playlists:
+                            while (query.Read()) {
+                                // get playlist info:
+                                int id = query.GetInt32(0);
+                                string playlistName = query.GetString(1);
+                                DateTime dateAdded = query.GetDateTime(2);
+                                // create media dictionary:
+                                Dictionary<int, AudioMedia> mediaList = new Dictionary<int, AudioMedia>();
+                                // query database for media:
+                                using (SqliteCommand mediaCommand = connection.CreateCommand()) {
+                                    mediaCommand.CommandText = @"SELECT MediaId FROM PlaylistMediaMap WHERE PlaylistId=$id";
+                                    mediaCommand.Parameters.AddWithValue("id", id);
+                                    using (SqliteDataReader mediaQuery = mediaCommand.ExecuteReader()) {
+                                        while (mediaQuery.Read()) {
+                                            id = mediaQuery.GetInt32(0);
+                                            if (trackedMedia.TryGetValue(id, out AudioMedia media)) {
+                                                mediaList[id] = media;
+                                            }
+                                        }
                                     }
                                 }
+                                // create playlist object:
+                                Playlist playlist = new Playlist(id, playlistName, dateAdded, mediaList);
+                                // track playlist:
+                                trackedPlaylists[id] = playlist;
                             }
-                            // create playlist object:
-                            Playlist playlist = new Playlist(id, playlistName, mediaList);
-                            // track playlist:
-                            trackedPlaylists[id] = playlist;
                         }
                     }
                     // commit transaction:
                     transaction.Commit();
+                }
+            }
+        }
+
+        #endregion
+
+        #region CreatePlaylist
+
+        /// <summary>
+        /// Creates a new playlist with the name <paramref name="playlistName"/>.
+        /// </summary>
+        public Playlist CreatePlaylist(in string playlistName) {
+            if (playlistName == null) throw new ArgumentNullException(nameof(playlistName));
+            using (SqliteConnection connection = DataAccess.GetConnection()) {
+                connection.Open();
+                using (SqliteTransaction transaction = connection.BeginTransaction()) {
+                    using (SqliteCommand command = connection.CreateCommand()) {
+                        // set playlist into database:
+                        command.CommandText = @"INSERT INTO Playlists (PlaylistId, PlaylistName, DateAdded) VALUES (NULL, $name, CURRENT_TIMESTAMP)";
+                        command.Parameters.AddWithValue("name", playlistName);
+                        command.ExecuteNonQuery();
+                        // find playlist id:
+                        command.CommandText = @"SELECT last_insert_rowid()";
+                        int playlistId = (int)(long)command.ExecuteScalar();
+                        // find date added:
+                        command.CommandText = @"SELECT DateAdded FROM Playlists WHERE PlaylistId=$id";
+                        command.Parameters.AddWithValue("id", playlistId);
+                        using (SqliteDataReader query = command.ExecuteReader()) {
+                            if (!query.Read()) return null;
+                            // get date added:
+                            DateTime dateAdded = query.GetDateTime(0);
+                            // commit transaction:
+                            transaction.Commit();
+                            // create playlist:
+                            Playlist playlist = new Playlist(playlistId, playlistName, dateAdded, new Dictionary<int, AudioMedia>());
+                            // track new playlist:
+                            trackedPlaylists[playlistId] = playlist;
+                            // return new playlist:
+                            return playlist;
+                        }
+                    }
+                }
+            }
+        }
+
+        #endregion
+
+        #region RenamePlaylist
+
+        /// <summary>
+        /// Renames a <paramref name="playlist"/> to <paramref name="playlistName"/>.
+        /// </summary>
+        public void RenamePlaylist(in Playlist playlist, in string playlistName) {
+            if (playlistName == null) throw new ArgumentNullException(nameof(playlistName));
+            if (playlist.Name == playlistName) return; // already has target name
+            using (SqliteConnection connection = DataAccess.GetConnection()) {
+                connection.Open();
+                using (SqliteTransaction transaction = connection.BeginTransaction()) {
+                    using (SqliteCommand command = connection.CreateCommand()) {
+                        command.CommandText = @"UPDATE Playlists SET PlaylistName=$name WHERE PlaylistId=$id";
+                        playlist.Name = playlistName;
+                        command.Parameters.AddWithValue("id", playlist.Id);
+                        command.Parameters.AddWithValue("name", playlist.Name);
+                        command.ExecuteNonQuery();
+                    }
+                    transaction.Commit();
+                }
+            }
+        }
+
+        #endregion
+
+        #region DeletePlaylist
+
+        public void DeletePlaylist(in Playlist playlist) {
+            if (playlist == null) throw new ArgumentNullException(nameof(playlist));
+            using (SqliteConnection connection = DataAccess.GetConnection()) {
+                connection.Open();
+                using (SqliteTransaction transaction = connection.BeginTransaction()) {
+                    using (SqliteCommand command = connection.CreateCommand()) {
+                        command.CommandText = @"DELETE FROM Playlists WHERE PlaylistId=$id";
+                        command.Parameters.AddWithValue("id", playlist.Id);
+                        command.ExecuteNonQuery();
+                    }
+                    transaction.Commit();
+                }
+            }
+            trackedPlaylists.Remove(playlist.Id);
+        }
+
+        #endregion
+
+        #region AddAudioMediaToPlaylist
+
+        public void AddAudioMediaToPlaylist(in AudioMedia audioMedia, in Playlist playlist) {
+            if (audioMedia == null) throw new ArgumentNullException(nameof(audioMedia));
+            if (playlist == null) throw new ArgumentNullException(nameof(playlist));
+            if (playlist.Contains(audioMedia)) return; // already added to playlist
+            using (SqliteConnection connection = DataAccess.GetConnection()) {
+                connection.Open();
+                using (SqliteTransaction transaction = connection.BeginTransaction()) {
+                    using (SqliteCommand command = connection.CreateCommand()) {
+                        command.CommandText = @"INSERT INTO PlaylistMediaMap (PlaylistId, MediaId) VALUES ($playlistId, $mediaId)";
+                        command.Parameters.AddWithValue("playlistId", playlist.Id);
+                        command.Parameters.AddWithValue("mediaId", audioMedia.Id);
+                        command.ExecuteNonQuery();
+                    }
+                    transaction.Commit();
+                    playlist.Register(audioMedia);
+                }
+            }
+        }
+
+        #endregion
+
+        #region RemoveAudioMediaFromPlaylist
+
+        public void RemoveAudioMediaFromPlaylist(in AudioMedia audioMedia, in Playlist playlist) {
+            if (audioMedia == null) throw new ArgumentNullException(nameof(audioMedia));
+            if (playlist == null) throw new ArgumentNullException(nameof(playlist));
+            if (!playlist.Contains(audioMedia)) return; // already removed from playlist
+            using (SqliteConnection connection = DataAccess.GetConnection()) {
+                connection.Open();
+                using (SqliteTransaction transaction = connection.BeginTransaction()) {
+                    using (SqliteCommand command = connection.CreateCommand()) {
+                        command.CommandText = @"DELETE FROM PlaylistMediaMap WHERE PlaylistId=$playlistId AND MediaId=$mediaId";
+                        command.Parameters.AddWithValue("playlistId", playlist.Id);
+                        command.Parameters.AddWithValue("mediaId", audioMedia.Id);
+                        command.ExecuteNonQuery();
+                    }
+                    transaction.Commit();
+                    playlist.Unregister(audioMedia);
                 }
             }
         }
@@ -301,16 +439,19 @@ namespace MusicPlayer.Media {
                 connection.Open();
                 using (SqliteTransaction transaction = connection.BeginTransaction()) {
                     // check if directory already exists in database:
-                    SqliteCommand command = connection.CreateCommand();
-                    command.CommandText = @"SELECT LocationId FROM MediaLocations WHERE LocationPath=$path";
-                    command.Parameters.AddWithValue("path", path);
-                    SqliteDataReader query = command.ExecuteReader();
-                    if (query.HasRows) return; // already contains target
+                    using (SqliteCommand command = connection.CreateCommand()) {
+                        command.CommandText = @"SELECT LocationId FROM MediaLocations WHERE LocationPath=$path";
+                        command.Parameters.AddWithValue("path", path);
+                        using (SqliteDataReader query = command.ExecuteReader()) {
+                            if (query.HasRows) return; // already contains target
+                        }
+                    }
                     // add location:
-                    command = connection.CreateCommand();
-                    command.CommandText = @"INSERT INTO MediaLocations (LocationId, LocationPath, DateAdded) VALUES (NULL, $path, CURRENT_TIMESTAMP)";
-                    command.Parameters.AddWithValue("path", path);
-                    command.ExecuteNonQuery();
+                    using (SqliteCommand command = connection.CreateCommand()) {
+                        command.CommandText = @"INSERT INTO MediaLocations (LocationId, LocationPath, DateAdded) VALUES (NULL, $path, CURRENT_TIMESTAMP)";
+                        command.Parameters.AddWithValue("path", path);
+                        command.ExecuteNonQuery();
+                    }
                     // commit transaction:
                     transaction.Commit();
                 }
