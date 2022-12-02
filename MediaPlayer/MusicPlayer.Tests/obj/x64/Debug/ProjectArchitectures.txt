@@ -1,2 +1,0 @@
-D:\Development\Work\Apprenticeship\L4\SynopticProject\MediaPlayer\MediaPlayer\MusicPlayer.csproj;x64
-D:\Development\Work\Apprenticeship\L4\SynopticProject\MediaPlayer\MusicPlayer.Tests\MusicPlayer.Tests.csproj;x64
