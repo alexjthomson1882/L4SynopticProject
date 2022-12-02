@@ -73,6 +73,17 @@
 							<controls:DataGridTextColumn Tag="Duration" Header="Duration" CanUserResize="False" Width="Auto" Binding="{Binding DurationFormatted}"/>
 							<controls:DataGridTextColumn Tag="DateAdded" Header="Date Added" CanUserResize="False" Width="Auto" Binding="{Binding DateAddedFormatted}"/>
 						</controls:DataGrid.Columns>
+						<controls:DataGrid.RowStyle>
+							<Style TargetType="controls:DataGridRow">
+								<Setter Property="controls:DataGridRow.ContextFlyout">
+									<Setter.Value>
+										<MenuFlyout>
+											<MenuFlyoutItem x:Name="RemoveFromLibrary" Text="Remove from Library" Click="RemoveFromLibrary_Click"/>
+										</MenuFlyout>
+									</Setter.Value>
+								</Setter>
+							</Style>
+						</controls:DataGrid.RowStyle>
 					</controls:DataGrid>
 				</ScrollViewer>
 			</Grid>

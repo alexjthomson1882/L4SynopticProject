@@ -35,20 +35,38 @@ namespace MusicPlayer {
         #region constructor
 
         public LibraryPage() {
+            // initialise component:
+            InitializeComponent();
+            Loaded += OnLoaded;
+            DataContext = this;
             // get audio player and media manager:
             App application = Application.Current as App;
             playbackManager = application.PlaybackManager;
             mediaManager = application.MediaManager;
             // get media:
-            MediaList = new ObservableCollection<AudioMedia>(mediaManager.GetMediaList());
-            // initialise component:
-            InitializeComponent();
-            DataContext = this;
+            UpdateMediaList();
         }
 
         #endregion
 
         #region logic
+
+        #region OnLoaded
+
+        private void OnLoaded(object sender, RoutedEventArgs e) {
+            UpdateMediaList();
+        }
+
+        #endregion
+
+        #region UpdateMediaList
+
+        private void UpdateMediaList() {
+            MediaList = new ObservableCollection<AudioMedia>(mediaManager.GetMediaList());
+            MediaDataGrid.ItemsSource = MediaList;
+        }
+
+        #endregion
 
         #region MediaDataGrid
 
@@ -60,6 +78,16 @@ namespace MusicPlayer {
 
         private void MediaDataGrid_Sorting(object sender, DataGridColumnEventArgs e) {
             MediaDataGridUtility.HandleSortMediaDataGrid(MediaDataGrid, e.Column, MediaList);
+        }
+
+        #endregion
+
+        #region RemoveFromLibrary
+
+        private void RemoveFromLibrary_Click(object sender, RoutedEventArgs e) {
+            AudioMedia audioMedia = (sender as FrameworkElement).DataContext as AudioMedia;
+            mediaManager.RemoveAudioMediaFromLibrary(audioMedia);
+            UpdateMediaList();
         }
 
         #endregion

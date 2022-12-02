@@ -50,7 +50,7 @@ namespace MusicPlayer {
             // initialise playlist and media list:
             playlist = null;
             MediaList = new ObservableCollection<AudioMedia>();
-            LibraryMediaList = new ObservableCollection<AudioMedia>(mediaManager.GetMediaList());
+            UpdateLibrary();
         }
 
         #endregion
@@ -62,7 +62,7 @@ namespace MusicPlayer {
         private void OnLoaded(object sender, RoutedEventArgs e) {
             isLoaded = true;
             if (playlist != null) {
-                UpdatePlaylistInfo();
+                UpdatePlaylist();
             }
         }
 
@@ -74,15 +74,32 @@ namespace MusicPlayer {
             base.OnNavigatedTo(e);
             playlist = e.Parameter as Playlist;
             if (isLoaded && playlist != null) {
-                UpdatePlaylistInfo();
+                UpdatePlaylist();
             }
         }
 
         #endregion
 
-        #region UpdatePlaylistInfo
+        #region UpdateLibrary
 
-        private void UpdatePlaylistInfo() {
+        private void UpdateLibrary() {
+            if (LibraryMediaList == null) {
+                LibraryMediaList = new ObservableCollection<AudioMedia>(mediaManager.GetMediaList());
+            } else {
+                LibraryMediaList.Clear();
+                List<AudioMedia> list = mediaManager.GetMediaList();
+                for (int i = 0; i < list.Count; i++) {
+                    AudioMedia audioMedia = list[i];
+                    LibraryMediaList.Add(audioMedia);
+                }
+            }
+        }
+
+        #endregion
+
+        #region UpdatePlaylist
+
+        private void UpdatePlaylist() {
             App.QueueRunAsync(() => {
                 PlaylistNameTextBox.Text = playlist.Name;
             });
@@ -169,7 +186,7 @@ namespace MusicPlayer {
         private void AddToPlaylist_Click(object sender, RoutedEventArgs e) {
             AudioMedia audioMedia = (sender as FrameworkElement).DataContext as AudioMedia;
             mediaManager.AddAudioMediaToPlaylist(audioMedia, playlist);
-            UpdatePlaylistInfo();
+            UpdatePlaylist();
         }
 
         #endregion
@@ -179,7 +196,18 @@ namespace MusicPlayer {
         private void RemoveFromPlaylist_Click(object sender, RoutedEventArgs e) {
             AudioMedia audioMedia = (sender as FrameworkElement).DataContext as AudioMedia;
             mediaManager.RemoveAudioMediaFromPlaylist(audioMedia, playlist);
-            UpdatePlaylistInfo();
+            UpdatePlaylist();
+        }
+
+        #endregion
+
+        #region RemoveFromLibrary
+
+        private void RemoveFromLibrary_Click(object sender, RoutedEventArgs e) {
+            AudioMedia audioMedia = (sender as FrameworkElement).DataContext as AudioMedia;
+            mediaManager.RemoveAudioMediaFromLibrary(audioMedia);
+            UpdateLibrary();
+            UpdatePlaylist();
         }
 
         #endregion
@@ -213,7 +241,6 @@ namespace MusicPlayer {
         #endregion
 
         #endregion
-
     }
 
 }

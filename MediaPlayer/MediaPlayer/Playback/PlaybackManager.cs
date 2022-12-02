@@ -3,6 +3,8 @@
 using System;
 using System.Collections.Generic;
 
+using Windows.Media.Playback;
+
 namespace MusicPlayer.Playback {
 
     /// <summary>

@@ -189,6 +189,7 @@
 										<Setter.Value>
 											<MenuFlyout>
 												<MenuFlyoutItem x:Name="AddToPlaylist" Text="Add to Playlist" Click="AddToPlaylist_Click"/>
+												<MenuFlyoutItem x:Name="RemoveFromLibrary" Text="Remove from Library" Click="RemoveFromLibrary_Click"/>
 											</MenuFlyout>
 										</Setter.Value>
 									</Setter>

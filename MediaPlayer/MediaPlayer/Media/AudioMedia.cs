@@ -130,13 +130,18 @@ namespace MusicPlayer.Media {
         /// Returns a reference to the <see cref="StorageFile"/> that this <see cref="AudioMedia"/> references.
         /// </returns>
         public async Task<StorageFile> GetStorageFile() {
-            // get full path to directory containing the media file:
-            string folderPath = Directory.GetParent(path).FullName;
-            // get the folder object from the folder path:
-            StorageFolder folder = await StorageFolder.GetFolderFromPathAsync(folderPath);
-            if (folder == null) return null;
-            // return the media file from within the folder:
-            return await folder.GetFileAsync(System.IO.Path.GetFileName(path));
+            try {
+                // get full path to directory containing the media file:
+                string folderPath = Directory.GetParent(path).FullName;
+                // get the folder object from the folder path:
+                StorageFolder folder = await StorageFolder.GetFolderFromPathAsync(folderPath);
+                if (folder == null) return null;
+                // return the media file from within the folder:
+                StorageFile file = await folder.GetFileAsync(System.IO.Path.GetFileName(path));
+                return file;
+            } catch (FileNotFoundException) {
+                return null;
+            }
         }
 
         #endregion

@@ -201,6 +201,35 @@ namespace MusicPlayer.Media {
 
         #endregion
 
+        #region RemoveAudioMediaFromLibrary
+
+        public void RemoveAudioMediaFromLibrary(in AudioMedia audioMedia) {
+            if (audioMedia == null) throw new ArgumentNullException(nameof(audioMedia));
+            int mediaId = audioMedia.ID;
+            if (!trackedMedia.ContainsKey(mediaId)) return; // already not tracked
+            using (SqliteConnection connection = DataAccess.GetConnection()) {
+                connection.Open();
+                using (SqliteTransaction transaction = connection.BeginTransaction()) {
+                    using (SqliteCommand command = connection.CreateCommand()) {
+                        command.CommandText = @"DELETE FROM Media WHERE MediaId=$mediaId";
+                        command.Parameters.AddWithValue("mediaId", mediaId);
+                        command.ExecuteNonQuery();
+                        command.CommandText = @"DELETE FROM PlaylistMediaMap WHERE MediaId=$mediaId";
+                        command.ExecuteNonQuery();
+                    }
+                    transaction.Commit();
+                    // remove from tracked media:
+                    trackedMedia.Remove(mediaId);
+                    // remove from tracked playlists:
+                    foreach (Playlist playlist in trackedPlaylists.Values) {
+                        playlist.Unregister(audioMedia);
+                    }
+                }
+            }
+        }
+
+        #endregion
+
         #region ReloadPlaylists
 
         public void ReloadPlaylists() {

@@ -1,0 +1,8 @@
+The following are lists of colours to use for the application:
+
+#FFF
+#000
+#121212
+#181818
+#282828
+#4D4D4D
