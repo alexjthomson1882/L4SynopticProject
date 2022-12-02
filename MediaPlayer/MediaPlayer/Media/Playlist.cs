@@ -59,17 +59,17 @@ namespace MusicPlayer.Media {
 
         public void Register(in AudioMedia media) {
             if (media == null) throw new ArgumentNullException(nameof(media));
-            mediaDictionary[media.Id] = media;
+            mediaDictionary[media.ID] = media;
         }
 
         public void Unregister(in AudioMedia media) {
             if (media == null) throw new ArgumentNullException(nameof(media));
-            mediaDictionary.Remove(media.Id);
+            mediaDictionary.Remove(media.ID);
         }
 
         public bool Contains(in AudioMedia media) {
             if (media == null) throw new ArgumentNullException(nameof(media));
-            return mediaDictionary.ContainsKey(media.Id);
+            return mediaDictionary.ContainsKey(media.ID);
         }
 
         #endregion

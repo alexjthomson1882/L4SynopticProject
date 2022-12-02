@@ -11599,9 +11599,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Development\\Work\\Apprenticeship\\L4\\SynopticProject\\MediaPlayer\\MediaPlayer\\MediaPlayer.csproj",
-      "projectName": "MediaPlayer",
-      "projectPath": "D:\\Development\\Work\\Apprenticeship\\L4\\SynopticProject\\MediaPlayer\\MediaPlayer\\MediaPlayer.csproj",
+      "projectUniqueName": "D:\\Development\\Work\\Apprenticeship\\L4\\SynopticProject\\MediaPlayer\\MediaPlayer\\MusicPlayer.csproj",
+      "projectName": "MusicPlayer",
+      "projectPath": "D:\\Development\\Work\\Apprenticeship\\L4\\SynopticProject\\MediaPlayer\\MediaPlayer\\MusicPlayer.csproj",
       "packagesPath": "C:\\Users\\alext\\.nuget\\packages\\",
       "outputPath": "D:\\Development\\Work\\Apprenticeship\\L4\\SynopticProject\\MediaPlayer\\MediaPlayer\\obj\\",
       "projectStyle": "PackageReference",

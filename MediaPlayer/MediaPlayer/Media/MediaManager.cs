@@ -20,9 +20,7 @@ namespace MusicPlayer.Media {
         /// Supported file extensions.
         /// </summary>
         public static HashSet<string> SupportedFileExtensions = new HashSet<string>() {
-            ".mp3",
-            ".wav",
-            ".ogg"
+            ".mp3", ".wav", ".ogg", ".flac", ".avi", ".wmv", ".m4a"
         };
 
         #endregion
@@ -351,7 +349,7 @@ namespace MusicPlayer.Media {
                     using (SqliteCommand command = connection.CreateCommand()) {
                         command.CommandText = @"INSERT INTO PlaylistMediaMap (PlaylistId, MediaId) VALUES ($playlistId, $mediaId)";
                         command.Parameters.AddWithValue("playlistId", playlist.Id);
-                        command.Parameters.AddWithValue("mediaId", audioMedia.Id);
+                        command.Parameters.AddWithValue("mediaId", audioMedia.ID);
                         command.ExecuteNonQuery();
                     }
                     transaction.Commit();
@@ -374,7 +372,7 @@ namespace MusicPlayer.Media {
                     using (SqliteCommand command = connection.CreateCommand()) {
                         command.CommandText = @"DELETE FROM PlaylistMediaMap WHERE PlaylistId=$playlistId AND MediaId=$mediaId";
                         command.Parameters.AddWithValue("playlistId", playlist.Id);
-                        command.Parameters.AddWithValue("mediaId", audioMedia.Id);
+                        command.Parameters.AddWithValue("mediaId", audioMedia.ID);
                         command.ExecuteNonQuery();
                     }
                     transaction.Commit();

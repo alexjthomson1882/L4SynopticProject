@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "3YogD6OSgiNaFH/Hf+c4MnoU5rs8bAk6XD/mLTcfWtuZ1obCItlnR3Vd7XLwdRp+J1UnxsnT9lBNO7eWGumKQg==",
+  "dgSpecHash": "jvs8qAkgupInagCadIY+Uc0dYWSf6Y11KeThupLFqWU0FBpNLUrrCma2KOm8ksJCJonNSFVA5e3siemFP5Jx3Q==",
   "success": true,
-  "projectFilePath": "D:\\Development\\Work\\Apprenticeship\\L4\\SynopticProject\\MediaPlayer\\MediaPlayer\\MediaPlayer.csproj",
+  "projectFilePath": "D:\\Development\\Work\\Apprenticeship\\L4\\SynopticProject\\MediaPlayer\\MediaPlayer\\MusicPlayer.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\alext\\.nuget\\packages\\colorcode.core\\2.0.6\\colorcode.core.2.0.6.nupkg.sha512",
     "C:\\Users\\alext\\.nuget\\packages\\colorcode.uwp\\2.0.6\\colorcode.uwp.2.0.6.nupkg.sha512",
